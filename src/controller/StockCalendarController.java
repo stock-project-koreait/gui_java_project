@@ -10,6 +10,7 @@ public class StockCalendarController {
 
 	MainModel mainModel;
 	MainView mainView;
+	
 
 	public StockCalendarController(MainModel mainModel, MainView mainView) {
 		this.mainModel = mainModel;
