@@ -17,5 +17,6 @@ public class Main {
 		
 		MainModel mainModel = new MainModel();
 		MainController mainController = new MainController(mainView, mainModel);
+		
 	}
 }
