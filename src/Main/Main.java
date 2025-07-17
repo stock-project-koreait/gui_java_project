@@ -19,5 +19,8 @@ public class Main {
 		MainController mainController = new MainController(mainView, mainModel);
 		
 		System.out.println("연습용");
-	} // main
+	
+	}
+
 } // class 
+
