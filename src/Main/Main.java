@@ -10,7 +10,6 @@ import model.StockInfoModel;
 import view.MainView;
 
 public class Main {
-
 	public static void main(String[] args) {
 		MainView mainView = new MainView();
 		mainView.initView();
@@ -19,8 +18,7 @@ public class Main {
 		MainController mainController = new MainController(mainView, mainModel);
 		
 		System.out.println("연습용");
-	
-	}
-
+		System.out.println("branch");
+	} // main
 } // class 
 
