@@ -10,14 +10,28 @@ public class StockInfoController {
 	MainModel mainModel;
 	MainView mainView;
 
+	public StockInfoController() {
+	}
+	
 	public StockInfoController(MainModel mainModel, MainView mainView) {
 		this.mainModel = mainModel;
 		this.mainView = mainView;
 	}
 
 	public void getTable() {
-
 		mainModel.getStockInfoModel().getStockInfoList();
 	}
 
-}
+	public void getTest() {
+		System.out.println("test 중입니다.");
+	}
+	
+} //class
+
+
+
+
+
+
+
+
