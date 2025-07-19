@@ -15,11 +15,13 @@ import controller.StockCalendarController;
 
 public class StockCalendarPanel extends JPanel {
 	
-	StockCalendarController scc;
+	JButton btn;
 	
 	public StockCalendarPanel() {
-		Calendar calendar = Calendar.getInstance();
-		
+		initCalendar();
+	}
+	
+	public void initCalendar() {
 		JTextPane tp = new JTextPane();
 		tp.setText("테스트 텍스트 패인");
 //		tp.setBackground(Color.BLACK);
@@ -30,6 +32,14 @@ public class StockCalendarPanel extends JPanel {
 		StyleConstants.setBackground(attr, Color.BLUE);
 		tp.setCharacterAttributes(attr, true);
 		
+		btn = new JButton("콘솔 테스트");
+		add(btn);
+		
+		
 	}
-
+	
+	// 버튼 클릭 시 콘솔에 출력하는 메서드
+	public void addbtnClickToPrint(ActionListener actionListener) {
+		btn.addActionListener(actionListener);
+	}
 }
