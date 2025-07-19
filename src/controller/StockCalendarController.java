@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import model.MainModel;
@@ -15,12 +17,21 @@ public class StockCalendarController {
 	public StockCalendarController(MainModel mainModel, MainView mainView) {
 		this.mainModel = mainModel;
 		this.mainView = mainView;
+		
+		getDate();
 	}
 
 	public void getDate() {
-		System.out.println(mainModel.getStockDividendInfoModel().getApi("삼성전자"));
-//		List<String> cashDvdList = mainModel.getStockDividendInfoModel().getApi("삼성전자");
 		
-	}
-
+		mainView.getStockCalendarPanel().addbtnClickToPrint(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(mainModel.getStockDividendInfoModel().getApi("삼성전자"));
+				System.out.println("view 컨트롤러 테스트");
+			}
+		});
+		
+	} // getDate
+	
 }

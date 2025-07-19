@@ -51,7 +51,6 @@ public class StockInfoModel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return isinCd;
 
 	} // getIsinCd
