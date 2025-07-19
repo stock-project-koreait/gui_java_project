@@ -9,6 +9,7 @@ public class StockDividendInfoVO {
 	private String stckDvdnRcdNm; // 배당 타입
 	private String stckGenrDvdnAmt; // 한 주당 배당금
 	private String stckGenrCashDvdnRt; // 현금배당률
+	private String stckParPrc; // 주식 가격
 
 	public StockDividendInfoVO() {
 	}
@@ -71,11 +72,20 @@ public class StockDividendInfoVO {
 		this.stckGenrCashDvdnRt = stckGenrCashDvdnRt;
 	}
 
+	public String getStckParPrc() {
+		return stckParPrc;
+	}
+
+	public void setStckParPrc(String stckParPrc) {
+		this.stckParPrc = stckParPrc;
+	}
+
 	@Override
 	public String toString() {
 		return "StockDividendInfoVO [isinCdNm=" + isinCdNm + ", dvdnBasDt=" + dvdnBasDt + ", cashDvdnPayDt="
 				+ cashDvdnPayDt + ", stckDvdnRcdNm=" + stckDvdnRcdNm + ", stckGenrDvdnAmt=" + stckGenrDvdnAmt
-				+ ", stckGenrCashDvdnRt=" + stckGenrCashDvdnRt + "]";
+				+ ", stckGenrCashDvdnRt=" + stckGenrCashDvdnRt + ", stckParPrc=" + stckParPrc + "]";
 	}
+
 
 }
