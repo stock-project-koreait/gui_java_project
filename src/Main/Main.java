@@ -17,8 +17,19 @@ public class Main {
 		MainModel mainModel = new MainModel();
 		MainController mainController = new MainController(mainView, mainModel);
 		
-		System.out.println("연습용");
-		System.out.println("branch");
+		
+		//System.out.println(StockInfoModel.getStockInfo("삼성전자"));
+		
 	} // main
 } // class 
+
+
+
+
+
+
+
+
+
+
 
