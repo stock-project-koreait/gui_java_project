@@ -63,17 +63,20 @@ public class StockDividendInfoModel {
 			JsonArray itemArray = jsonObj.getAsJsonObject("response").getAsJsonObject("body").getAsJsonObject("items")
 					.getAsJsonArray("item");
 
-			StockDividendInfoVO stockDividendInfoVO = new StockDividendInfoVO(
-					itemArray.get(0).getAsJsonObject().get("isinCdNm").getAsString(), // 회사이름
-					itemArray.get(0).getAsJsonObject().get("dvdnBasDt").getAsString(), // 배당기준일
-					itemArray.get(0).getAsJsonObject().get("cashDvdnPayDt").getAsString(), // 현급지급일
-					itemArray.get(0).getAsJsonObject().get("stckDvdnRcdNm").getAsString(), // 배당 타입
-					itemArray.get(0).getAsJsonObject().get("stckGenrDvdnAmt").getAsString(), // 한 주당 배당금
-					itemArray.get(0).getAsJsonObject().get("stckGenrCashDvdnRt").getAsString() // 현금배당률
-			);
-			
-			stockDividendList.addElement(stockDividendInfoVO);
-			
+			for (JsonElement ele : itemArray) {
+				JsonObject obj = ele.getAsJsonObject();
+				
+				StockDividendInfoVO stockDividendInfoVO = new StockDividendInfoVO(
+						obj.getAsJsonObject().get("isinCdNm").getAsString(), // 회사이름
+						obj.getAsJsonObject().get("dvdnBasDt").getAsString(), // 배당기준일
+						obj.getAsJsonObject().get("cashDvdnPayDt").getAsString(), // 현급지급일
+						obj.getAsJsonObject().get("stckDvdnRcdNm").getAsString(), // 배당 타입
+						obj.getAsJsonObject().get("stckGenrDvdnAmt").getAsString(), // 한 주당 배당금
+						obj.getAsJsonObject().get("stckGenrCashDvdnRt").getAsString() // 현금배당률
+				);
+				
+				stockDividendList.addElement(stockDividendInfoVO);
+			}
 
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
