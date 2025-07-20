@@ -1,34 +1,20 @@
 package Main;
 
-import java.util.Map;
-
 import controller.MainController;
-import io.github.cdimascio.dotenv.Dotenv;
 import model.MainModel;
 import model.StockDividendInfoModel;
-import model.StockInfoModel;
-import model.StockJsonModel;
 import view.MainView;
 
-public class Main {
+public class TestMain {
 	public static void main(String[] args) {
 		MainView mainView = new MainView();
 		MainModel mainModel = new MainModel();
 		MainController mainController = new MainController(mainView, mainModel);
 		
-		System.out.println(mainModel.getStockJsonModel().getJson());
+		//System.out.println(mainModel.getStockJsonModel().getJson());
+		
+		//System.out.println(mainModel.getStockDividendInfoModel().getApi("삼성전자"));
 		
 		
 	} // main
-} // class 
-
-
-
-
-
-
-
-
-
-
-
+}

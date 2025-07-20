@@ -33,6 +33,10 @@ public class StockJsonModel {
 	public StockJsonModel() {
 	}
 	
+	public static DefaultListModel<StockJsonVO> getStockJsonList() {
+		return stockJsonList;
+	}
+
 	public static DefaultListModel<StockJsonVO> getJson(){
 		// request 요청 객체 만들기
 		Request request = new Request.Builder().url("http://localhost:3000/stock").build();
