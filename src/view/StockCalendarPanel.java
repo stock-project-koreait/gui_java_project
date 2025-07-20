@@ -81,7 +81,6 @@ public class StockCalendarPanel extends JPanel {
 		add(showDayAndCompany);
 	}
 	
-	
 	public void addbtnClickToPrint(ActionListener actionListener) {
 		btn.addActionListener(actionListener);
 	}
