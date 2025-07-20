@@ -38,7 +38,7 @@ public class StockCalendarPanel extends JPanel {
 		
 	}
 	
-	// 버튼 클릭 시 콘솔에 출력하는 메서드
+	
 	public void addbtnClickToPrint(ActionListener actionListener) {
 		btn.addActionListener(actionListener);
 	}

@@ -22,14 +22,15 @@ import vo.StockDividendInfoVO;
 
 // 주식 배당금 정보 api를 담는 모델
 public class StockDividendInfoModel {
-	
+
 	static Dotenv dotenv = Dotenv.load();
 	static String apiKey = dotenv.get("STOCK_KEY");
 
-	private static final String STOCK_API = "https://apis.data.go.kr/1160100/service/GetStocDiviInfoService/getDiviInfo?serviceKey=" + apiKey + "&pageNo=1&numOfRows=100&resultType=json&isinCd=";
+	private static final String STOCK_API = "https://apis.data.go.kr/1160100/service/GetStocDiviInfoService/getDiviInfo?serviceKey="
+			+ apiKey + "&pageNo=1&numOfRows=100&resultType=json&isinCd=";
 
 	private static DefaultListModel<StockDividendInfoVO> stockDividendList = new DefaultListModel<StockDividendInfoVO>();
-	
+
 	// 통신 객체 (HTTP Client : HTTP 요청을 보내고 응답받는 객체)
 	private static final OkHttpClient client = new OkHttpClient();
 	// Gson 객체
@@ -37,7 +38,11 @@ public class StockDividendInfoModel {
 
 	public StockDividendInfoModel() {
 	}
-	
+
+	public static DefaultListModel<StockDividendInfoVO> getStockDividendList() {
+		return stockDividendList;
+	}
+
 	// 주식 배당금 api에서 회사이름, 배당기준일, 현급지급일, 배당타입, 한 주당 배당금, 현금 배당률를 listModel를 반환하는 메서드
 	public static DefaultListModel<StockDividendInfoVO> getApi(String itmsNm) {
 
@@ -65,25 +70,24 @@ public class StockDividendInfoModel {
 
 			for (JsonElement ele : itemArray) {
 				JsonObject obj = ele.getAsJsonObject();
-				
+
 				StockDividendInfoVO stockDividendInfoVO = new StockDividendInfoVO(
-						obj.getAsJsonObject().get("isinCdNm").getAsString(), // 회사이름
-						obj.getAsJsonObject().get("dvdnBasDt").getAsString(), // 배당기준일
-						obj.getAsJsonObject().get("cashDvdnPayDt").getAsString(), // 현급지급일
-						obj.getAsJsonObject().get("stckDvdnRcdNm").getAsString(), // 배당 타입
-						obj.getAsJsonObject().get("stckGenrDvdnAmt").getAsString(), // 한 주당 배당금
-						obj.getAsJsonObject().get("stckGenrCashDvdnRt").getAsString() // 현금배당률
+						obj.get("isinCdNm").getAsString(), // 회사이름
+						obj.get("dvdnBasDt").getAsString(), // 배당기준일
+						obj.get("cashDvdnPayDt").getAsString(), // 현급지급일
+						obj.get("stckDvdnRcdNm").getAsString(), // 배당 타입
+						obj.get("stckGenrDvdnAmt").getAsString(), // 한 주당 배당금
+						obj.get("stckGenrCashDvdnRt").getAsString() // 현금배당률
 				);
-				
+
 				stockDividendList.addElement(stockDividendInfoVO);
 			}
 
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
-		
+
 		return stockDividendList;
 	} // getApi
-	
 
 }
