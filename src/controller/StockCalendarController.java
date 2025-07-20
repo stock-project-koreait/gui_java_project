@@ -27,8 +27,14 @@ public class StockCalendarController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(mainModel.getStockDividendInfoModel().getApi("삼성전자"));
 				System.out.println("view 컨트롤러 테스트");
+				mainModel.getStockDividendInfoModel().getApi("삼성전자");
+				
+				int listSize = mainModel.getStockDividendInfoModel().getStockDividendList().size();
+				// stockDividendList에서 모든 배당기준일만 출력
+				for(int i=0; i<listSize; i++) {
+					System.out.println(mainModel.getStockDividendInfoModel().getStockDividendList().get(i).getDvdnBasDt());
+				}
 			}
 		});
 		

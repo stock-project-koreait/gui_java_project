@@ -7,6 +7,7 @@ import javax.swing.DefaultListModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import okhttp3.OkHttpClient;
@@ -68,16 +69,22 @@ public class StockInfoModel {
 			JsonArray itemArray = jsonObj.getAsJsonObject("response").getAsJsonObject("body").getAsJsonObject("items")
 					.getAsJsonArray("item");
 			
-			StockInfoVO stockInfoVO = new StockInfoVO(
-					itemArray.get(0).getAsJsonObject().get("mrktTotAmt").getAsString(), //시가총액
-					itemArray.get(0).getAsJsonObject().get("isinCd").getAsString(), // isinCode
-					itemArray.get(0).getAsJsonObject().get("mkp").getAsString(), // 시가
-					itemArray.get(0).getAsJsonObject().get("clpr").getAsString(), // 종가
-					itemArray.get(0).getAsJsonObject().get("hipr").getAsString(), // 고가
-					itemArray.get(0).getAsJsonObject().get("lopr").getAsString() // 저가
-			);
+			for(JsonElement ele : itemArray) {
+				JsonObject obj = ele.getAsJsonObject();
+				
+				StockInfoVO stockInfoVO = new StockInfoVO(
+						obj.get("mrktTotAmt").getAsString(), //시가총액
+						obj.get("isinCd").getAsString(), // isinCode
+						obj.get("mkp").getAsString(), // 시가
+						obj.get("clpr").getAsString(), // 종가
+						obj.get("hipr").getAsString(), // 고가
+						obj.get("lopr").getAsString() // 저가
+						);
+				
+				stockInfoList.addElement(stockInfoVO);
+			}
 			
-			stockInfoList.addElement(stockInfoVO);
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
