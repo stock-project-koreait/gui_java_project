@@ -18,7 +18,7 @@ public class StockCalendarController {
 		this.mainModel = mainModel;
 		this.mainView = mainView;
 		
-		getDate();
+//		getDate();
 	}
 
 	public void getDate() {
