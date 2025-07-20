@@ -7,6 +7,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 import model.MainModel;
 import model.StockDividendInfoModel;
 import model.StockInfoModel;
+import model.StockJsonModel;
 import view.MainView;
 
 public class Main {
@@ -14,8 +15,10 @@ public class Main {
 		MainView mainView = new MainView();
 		MainModel mainModel = new MainModel();
 		MainController mainController = new MainController(mainView, mainModel);
+		
+		System.out.println(mainModel.getStockJsonModel().getJson());
 
-
+		
 	} // main
 } // class 
 

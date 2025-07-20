@@ -5,21 +5,25 @@ public class StockJsonVO {
 
 	private int id; // 아이디
 	private String name; // 주식종목명
+	private String category; // 회사 업종
+	private String stockNum; // 상장주식 수 
 	private boolean isLike; // 즐겨찾기여부
 	private int count; // 가지고 있는 주 수
-	private String category; // 회사 업종
+	
 
 	public StockJsonVO() {
 	}
 
-	public StockJsonVO(int id, String name, boolean isLike, int count, String category) {
+	public StockJsonVO(int id, String name, String category, String stockNum, boolean isLike, int count) {
 		this.id = id;
 		this.name = name;
+		this.category = category;
+		this.stockNum = stockNum;
 		this.isLike = isLike;
 		this.count = count;
-		this.category = category;
 	}
 
+	
 	public int getId() {
 		return id;
 	}
@@ -34,6 +38,22 @@ public class StockJsonVO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getStockNum() {
+		return stockNum;
+	}
+
+	public void setStockNum(String stockNum) {
+		this.stockNum = stockNum;
 	}
 
 	public boolean isLike() {
@@ -52,16 +72,10 @@ public class StockJsonVO {
 		this.count = count;
 	}
 
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
 	@Override
 	public String toString() {
-		return "Stock [id=" + id + ", name=" + name + ", isLike=" + isLike + ", count=" + count + "]";
+		return "StockJsonVO [id=" + id + ", name=" + name + ", category=" + category + ", stockNum=" + stockNum
+				+ ", isLike=" + isLike + ", count=" + count + "]";
 	}
+
 }

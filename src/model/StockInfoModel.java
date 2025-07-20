@@ -59,7 +59,6 @@ public class StockInfoModel {
 	public static DefaultListModel<StockInfoVO> getStockInfo(String itmsNm) {
 		
 		Request request = new Request.Builder().url(STOCKINFO_API + itmsNm).build();
-		String isinCd = null;
 		
 		try {
 			Response response = client.newCall(request).execute();
