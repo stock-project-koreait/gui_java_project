@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class InfoPanelMainGrid extends JPanel{
+public class StockInfoPanelMainGrid extends JPanel{
 
     private JLabel lblSysdate;
     private JLabel lblDividendDate;
@@ -60,7 +60,7 @@ public class InfoPanelMainGrid extends JPanel{
 		return lblCashDvdnRt;
 	}
 
-	public InfoPanelMainGrid() {
+	public StockInfoPanelMainGrid() {
 		setLayout(new GridLayout(5, 4, 10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
         

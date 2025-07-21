@@ -19,7 +19,7 @@ import javax.swing.SwingConstants;
 public class StockInfoPanel extends JPanel {
 	
 	
-	private InfoPanelMainGrid infoPanelMainGrid;
+	private StockInfoPanelMainGrid infoPanelMainGrid;
 	
     // 데이터 표시 라벨들 (필드 선언)
 	private JPanel leftMenuPanel;
@@ -38,13 +38,13 @@ public class StockInfoPanel extends JPanel {
 		return stockName;
 	}
 
-	public InfoPanelMainGrid getInfoPanelMainGrid() {
+	public StockInfoPanelMainGrid getInfoPanelMainGrid() {
 		return infoPanelMainGrid;
 	}
 	
 	public StockInfoPanel() {
 		
-		infoPanelMainGrid = new InfoPanelMainGrid();
+		infoPanelMainGrid = new StockInfoPanelMainGrid();
         setLayout(new BorderLayout());
 
         // 1. 왼쪽 메뉴 (40개)

@@ -16,8 +16,6 @@ public class Main {
 		MainModel mainModel = new MainModel();
 		MainController mainController = new MainController(mainView, mainModel);
 		
-		System.out.println(mainModel.getStockJsonModel().getJson());
-		
 		
 	} // main
 } // class 

@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 import model.MainModel;
 import model.StockDividendInfoModel;
 import model.StockInfoModel;
-import view.InfoPanelMainGrid;
+import view.StockInfoPanelMainGrid;
 import view.MainView;
 import vo.StockDividendInfoVO;
 import vo.StockInfoVO;
@@ -76,7 +76,7 @@ public class StockInfoController {
 				int listSize = mainModel.getStockDividendInfoModel().getStockDividendList().size();
 				
 				// 중복 부분 변수에 담기
-				InfoPanelMainGrid IPMG = mainView.getStockInfoPanel().getInfoPanelMainGrid();
+				StockInfoPanelMainGrid IPMG = mainView.getStockInfoPanel().getInfoPanelMainGrid();
 				StockInfoVO SIVO_first = mainModel.getStockInfoModel().getStockInfoList().get(0);
 				StockDividendInfoVO SDIVO_last
 				= mainModel.getStockDividendInfoModel().getStockDividendList().get(listSize-1);
