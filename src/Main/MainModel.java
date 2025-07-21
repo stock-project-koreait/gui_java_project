@@ -1,4 +1,8 @@
-package model;
+package Main;
+
+import model.StockDividendInfoModel;
+import model.StockInfoModel;
+import model.StockJsonModel;
 
 public class MainModel {
 
@@ -18,9 +22,9 @@ public class MainModel {
 		return stockJsonModel;
 	}
 
-	public MainModel() {
-		stockInfoModel = new StockInfoModel();
-		stockDividendInfoModel = new StockDividendInfoModel();
-		stockJsonModel = new StockJsonModel();
+	public MainModel(StockInfoModel stockInfoModel, StockDividendInfoModel stockDividendInfoModel, StockJsonModel stockJsonModel) {
+		this.stockInfoModel = stockInfoModel;
+		this.stockDividendInfoModel = stockDividendInfoModel;
+		this.stockJsonModel = stockJsonModel;
 	}
 }
