@@ -7,7 +7,6 @@ import java.util.Objects;
 
 import javax.swing.DefaultListModel;
 
-import com.fasterxml.jackson.annotation.JacksonInject.Value;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -1,7 +1,10 @@
 package model;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -89,5 +92,24 @@ public class StockDividendInfoModel {
 
 		return stockDividendList;
 	} // getApi
-
-}
+	
+	/*
+	 리스트에 회사명, 예상 배당금, 2025년 배당금 지급 현황을 리스트에 담아서 view에 전달해야함
+	 
+	 [기능 별 메소드]
+	 1. 가장 최근 배당금 지급 날짜 리턴
+	 2. api 리스트 안에서 가장 최근 배당 데이터 리턴
+	 3. 최근 지급한 1주당 배당금 리턴
+	 4. 보유 주식 수 * 1주당 배당금 곱해서 다음 배당 지급일에 받을 배당금 리턴
+	 */
+	
+	// 사용자가 입력한 회사의 
+	// 제일 최근 배당 정보 리턴하는 메소드
+//	, int numberOfretainedStock
+	
+		
+				
+					
+			
+} // class
+	

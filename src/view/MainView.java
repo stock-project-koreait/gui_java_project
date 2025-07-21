@@ -67,7 +67,7 @@ public class MainView extends JFrame {
 
 		// 보유하고 있는 주식 패널
 		stockRetainedPanel = new StockRetainedPanel();
-		tabbedPane.add("보유하고 있는 주식", stockRetainedPanel);
+		tabbedPane.add("배당 수익금 예상", stockRetainedPanel);
 
 		add(tabbedPane);
 		setVisible(true);
