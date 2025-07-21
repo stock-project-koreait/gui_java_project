@@ -6,6 +6,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 import model.MainModel;
 import model.StockDividendInfoModel;
 import model.StockInfoModel;
+import model.StockJsonModel;
 import view.MainView;
 
 public class Main {
