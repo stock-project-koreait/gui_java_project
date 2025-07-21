@@ -1,6 +1,8 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
@@ -18,12 +20,19 @@ public class StockRetainedPanel extends JPanel {
 	
 	JButton getDividendBtn;
 	JTable table;
+	JPanel likeMenuPanel;
+	
 	private JTextField inputStockNm;
 	private JTextField inputNumberOfHoldings;
 	private String[] tableHeader;
 	
 	public StockRetainedPanel() {
-//		검색 패널 생성
+		
+//		즐겨찾기한 종목 목록 패널
+		likeMenuPanel = new JPanel(new GridLayout(50, 1, 2, 2));
+		setLayout(new BorderLayout());
+		
+//		메인(search)패널 생성
 		JPanel searchPane = new JPanel();
 
 //		컴포넌트들을 수직으로 배치하기 위해 BoxLayout 사용,
@@ -74,7 +83,6 @@ public class StockRetainedPanel extends JPanel {
 		
 //		StockRetainPanel에 검색 패널을 추가한다
 		add(searchPane);
-		
 		setVisible(true);
 		
 	} // StockRetainedPanel
