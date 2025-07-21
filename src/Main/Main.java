@@ -1,7 +1,6 @@
 package Main;
 
 import java.util.Map;
-
 import controller.MainController;
 import io.github.cdimascio.dotenv.Dotenv;
 import model.MainModel;
@@ -14,6 +13,7 @@ public class Main {
 		MainView mainView = new MainView();
 		MainModel mainModel = new MainModel();
 		MainController mainController = new MainController(mainView, mainModel);
+		
 	} // main
 } // class 
 
