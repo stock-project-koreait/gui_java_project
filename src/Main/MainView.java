@@ -1,4 +1,4 @@
-package view;
+package Main;
 
 import java.awt.FlowLayout;
 
@@ -6,6 +6,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import view.StockCalendarPanel;
+import view.StockInfoPanel;
+import view.StockRetainedPanel;
+import view.StockTablePanel;
 
 public class MainView extends JFrame {
 
@@ -67,7 +72,7 @@ public class MainView extends JFrame {
 
 		// 보유하고 있는 주식 패널
 		stockRetainedPanel = new StockRetainedPanel();
-		tabbedPane.add("보유하고 있는 주식", stockRetainedPanel);
+		tabbedPane.add("배당 수익금 예상", stockRetainedPanel);
 
 		add(tabbedPane);
 		setVisible(true);

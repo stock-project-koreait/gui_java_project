@@ -2,21 +2,16 @@ package Main;
 
 import java.util.Map;
 
-import controller.MainController;
 import io.github.cdimascio.dotenv.Dotenv;
-import model.MainModel;
 import model.StockDividendInfoModel;
 import model.StockInfoModel;
 import model.StockJsonModel;
-import view.MainView;
 
 public class Main {
 	public static void main(String[] args) {
 		MainView mainView = new MainView();
-		MainModel mainModel = new MainModel();
+		MainModel mainModel = new MainModel(new StockInfoModel(), new StockDividendInfoModel(), new StockJsonModel());
 		MainController mainController = new MainController(mainView, mainModel);
-		
-		System.out.println(mainModel.getStockJsonModel().getJson());
 		
 	} // main
 } // class 

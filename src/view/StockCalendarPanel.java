@@ -28,7 +28,7 @@ import controller.StockCalendarController;
 
 public class StockCalendarPanel extends JPanel {
 	
-	JButton btn;
+	JButton selectCompanyBtn;
 	JMonthChooser month;
 	JTextField textField;
 	
@@ -47,9 +47,9 @@ public class StockCalendarPanel extends JPanel {
 		add(textField);
 		textField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(600, 25, 109, 55);
-		add(btnNewButton);
+		selectCompanyBtn = new JButton("New button");
+		selectCompanyBtn.setBounds(600, 25, 109, 55);
+		add(selectCompanyBtn);
 		
 		JYearChooser yearChooser = new JYearChooser();
 		yearChooser.setBounds(69, 112, 531, 32);
@@ -82,6 +82,6 @@ public class StockCalendarPanel extends JPanel {
 	}
 	
 	public void addbtnClickToPrint(ActionListener actionListener) {
-		btn.addActionListener(actionListener);
+		selectCompanyBtn.addActionListener(actionListener);
 	}
 }

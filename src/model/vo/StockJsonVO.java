@@ -1,4 +1,4 @@
-package vo;
+package model.vo;
 
 // json 서버에서 가져온 주식 객체
 public class StockJsonVO {

@@ -1,4 +1,4 @@
-package vo;
+package model.vo;
 
 //주식 배당금 정보 api에서 가져온 객체
 public class StockDividendInfoVO {
