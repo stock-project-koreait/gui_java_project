@@ -1,7 +1,7 @@
 package controller;
 
-import model.MainModel;
-import view.MainView;
+import Main.MainModel;
+import Main.MainView;
 
 public class StockTableController {
 	// gui에서 주식테이블 이벤트가 들어갈 컨트롤러

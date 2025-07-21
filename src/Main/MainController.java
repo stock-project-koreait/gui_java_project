@@ -1,7 +1,9 @@
-package controller;
+package Main;
 
-import model.MainModel;
-import view.MainView;
+import controller.StockCalendarController;
+import controller.StockInfoController;
+import controller.StockRetainedController;
+import controller.StockTableController;
 
 public class MainController {
 
