@@ -7,7 +7,9 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -47,7 +49,7 @@ public class StockCalendarPanel extends JPanel {
 		add(textField);
 		textField.setColumns(10);
 		
-		selectCompanyBtn = new JButton("New button");
+		selectCompanyBtn = new JButton("회사 검색");
 		selectCompanyBtn.setBounds(600, 25, 109, 55);
 		add(selectCompanyBtn);
 		
@@ -64,13 +66,19 @@ public class StockCalendarPanel extends JPanel {
 		add(textPane);
 		
 		JPanel dayList = new JPanel(new GridLayout(6, 7));
+		List<JTextPane> dayPanes = new ArrayList<>();
 		
 		for(int i=1; i<7; i++) {
 			for(int j=1; j<8; j++) {
 				JTextPane day = new JTextPane();
 				day.setBorder(new LineBorder(Color.BLACK));
 				dayList.add(day);
+				dayPanes.add(day);
 			}
+		}
+		
+		for (int i = 0; i < 42; i++) {
+		    dayPanes.get(i).setText(i + "");
 		}
 		
 		dayList.setBounds(69, 151, 595, 474);

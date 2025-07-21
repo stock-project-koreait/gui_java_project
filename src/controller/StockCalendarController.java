@@ -8,6 +8,7 @@ import javax.swing.DefaultListModel;
 
 import Main.MainModel;
 import Main.MainView;
+import model.CalendarModel;
 import model.apiUtil.StockDeividendInfoAPI;
 import model.eventUtil.StockCalendarEvent;
 import model.vo.StockDividendInfoVO;
@@ -26,6 +27,11 @@ public class StockCalendarController {
 		this.stockCalendarEvent = new StockCalendarEvent();
 		
 		stockCalendarEvent.getDate(mainModel, mainView);
+	}
+	
+	public void loadCalendarData(int year, int month) {
+		CalendarModel calendarModel = new CalendarModel();
+		List<String> days = calendarModel.getCalendarDays(year, month);
 	}
 
 }
