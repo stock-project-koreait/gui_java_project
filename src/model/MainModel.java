@@ -18,4 +18,9 @@ public class MainModel {
 		return stockJsonModel;
 	}
 
+	public MainModel() {
+		stockInfoModel = new StockInfoModel();
+		stockDividendInfoModel = new StockDividendInfoModel();
+		stockJsonModel = new StockJsonModel();
+	}
 }
