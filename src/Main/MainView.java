@@ -1,4 +1,4 @@
-package view;
+package Main;
 
 import java.awt.FlowLayout;
 
@@ -6,6 +6,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import view.StockCalendarPanel;
+import view.StockInfoPanel;
+import view.StockRetainedPanel;
+import view.StockTablePanel;
 
 public class MainView extends JFrame {
 
