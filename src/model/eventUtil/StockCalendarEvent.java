@@ -2,11 +2,17 @@ package model.eventUtil;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
 
 import Main.MainModel;
 import Main.MainView;
+import model.CalendarModel;
+import model.StockDividendInfoModel;
 import model.apiUtil.StockDividendInfoAPI;
 import model.vo.StockDividendInfoVO;
 
@@ -15,26 +21,49 @@ public class StockCalendarEvent {
 	
 	public void getDate(MainModel mainModel, MainView mainView) {
 
-		mainView.getStockCalendarPanel().addbtnClickToPrint(new ActionListener() {
+		mainView.getStockCalendarPanel().addbtnClickToShowDividendCalendar(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("view 컨트롤러 테스트");
-				StockDividendInfoAPI.getApi("삼성전자");
+				
+				String companyName = mainView.getStockCalendarPanel().getTextField();
+				
+				if(companyName.isEmpty()) {
+					showMessage(mainView, "회사명을 입력하세요!");
+				}
+
+				StockDividendInfoAPI.getApi(companyName);
 				
 				DefaultListModel<StockDividendInfoVO> stockDividendList = mainModel.getStockDividendInfoModel().getStockDividendList();
+//				
+//				int listSize = stockDividendList.size();
+//				// stockDividendList에서 모든 배당기준일만 출력
+//				for (int i = 0; i < listSize; i++) {
+//					System.out.println(
+//							stockDividendList.get(i).getDvdnBasDt());
+//				}
 				
-				int listSize = stockDividendList.size();
-				// stockDividendList에서 모든 배당기준일만 출력
-				for (int i = 0; i < listSize; i++) {
-					System.out.println(
-							stockDividendList.get(i).getDvdnBasDt());
+				CalendarModel calendarModel = new CalendarModel();
+				List<JTextPane> days = mainView.getStockCalendarPanel().getDaysList();
+				int daysSize = days.size();
+				
+				List<String> dayStrings = calendarModel.getCalendarDays(
+						mainView.getStockCalendarPanel().getYearChooser(),
+						mainView.getStockCalendarPanel().getMonthChooser()
+				);
+
+				for (int i = 0; i < daysSize; i++) {
+					days.get(i).setText(dayStrings.get(i));
 				}
+				
 			}
 		});
 
 	} // getDate
 	
-	
+	// 메세지 경고창 출력하는 메서드
+	public void showMessage(MainView mainView, String message) {
+		JOptionPane.showMessageDialog(mainView, message);
+	} // showMessage
 
 }

@@ -29,7 +29,9 @@ public class StockCalendarController {
 		stockCalendarEvent.getDate(mainModel, mainView);
 	}
 	
+	// calendarModel에서 캘린더 데이터 가져옴
 	public void loadCalendarData(int year, int month) {
+		
 		CalendarModel calendarModel = new CalendarModel();
 		List<String> days = calendarModel.getCalendarDays(year, month);
 	}
