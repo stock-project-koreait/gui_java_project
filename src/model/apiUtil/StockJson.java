@@ -33,8 +33,8 @@ public class StockJson {
 
 			Response response = client.newCall(request).execute();
 			String json = Objects.requireNonNull(response.body()).string();
-			List<Map<String, Object>> data = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {
-			}.getType());
+			List<Map<String, Object>> data =
+					gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
 
 			for (Map<String, Object> item : data) {
 				int id = Integer.parseInt(item.get("id").toString());
@@ -53,21 +53,12 @@ public class StockJson {
 
 		return StockJsonModel.getStockJsonList();
 	} // getJson
-
-	public static void getJsonTest() {
-		// request 요청 객체 만들기
-		Request request = new Request.Builder().url("http://localhost:3000/stock").build();
-		try {
-			Response response = client.newCall(request).execute();
-			String json = Objects.requireNonNull(response.body()).string();
-			List<Map<String, Object>> data = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {
-			}.getType());
-
-			System.out.println(((Number) data.get(0).get("count")).intValue());
-
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
-	} // getJsonTest
-
 }
+
+
+
+
+
+
+
+
