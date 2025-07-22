@@ -21,7 +21,7 @@ import okhttp3.Response;
 public class StockInfoAPI {
 
 	private static final String STOCKINFO_API = "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey="
-			+ StockDeividendInfoAPI.apiKey + "&numOfRows=1&pageNo=1&resultType=json&itmsNm=";
+			+ StockDividendInfoAPI.apiKey + "&numOfRows=1&pageNo=1&resultType=json&itmsNm=";
 
 	// 통신 객체 (HTTP Client : HTTP 요청을 보내고 응답받는 객체)
 	private static final OkHttpClient client = new OkHttpClient();

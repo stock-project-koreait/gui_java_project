@@ -8,7 +8,7 @@ import javax.swing.DefaultListModel;
 
 import Main.MainModel;
 import Main.MainView;
-import model.apiUtil.StockDeividendInfoAPI;
+import model.apiUtil.StockDividendInfoAPI;
 import model.eventUtil.StockCalendarEvent;
 import model.vo.StockDividendInfoVO;
 

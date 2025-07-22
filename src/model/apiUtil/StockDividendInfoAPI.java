@@ -20,7 +20,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 // 주식 배당금 정보를 호출하는 API
-public class StockDeividendInfoAPI {
+public class StockDividendInfoAPI {
 
 	static Dotenv dotenv = Dotenv.load();
 	static String apiKey = dotenv.get("STOCK_KEY");
@@ -33,7 +33,7 @@ public class StockDeividendInfoAPI {
 	// Gson 객체
 	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-	public StockDeividendInfoAPI() {
+	public StockDividendInfoAPI() {
 	}
 
 	public static String getStockApi() {

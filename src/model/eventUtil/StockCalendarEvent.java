@@ -7,7 +7,7 @@ import javax.swing.DefaultListModel;
 
 import Main.MainModel;
 import Main.MainView;
-import model.apiUtil.StockDeividendInfoAPI;
+import model.apiUtil.StockDividendInfoAPI;
 import model.vo.StockDividendInfoVO;
 
 // 배당락일 캘린더에 들어가는 이벤트들을 담는 클래스
@@ -20,7 +20,7 @@ public class StockCalendarEvent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("view 컨트롤러 테스트");
-				StockDeividendInfoAPI.getApi("삼성전자");
+				StockDividendInfoAPI.getApi("삼성전자");
 				
 				DefaultListModel<StockDividendInfoVO> stockDividendList = mainModel.getStockDividendInfoModel().getStockDividendList();
 				
