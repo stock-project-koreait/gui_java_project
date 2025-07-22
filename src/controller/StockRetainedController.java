@@ -31,6 +31,9 @@ public class StockRetainedController {
 		this.stockRetainedEvent = new StockRetainedEvent();
 
 		stockRetainedEvent.buttonClickEvent(mainModel, mainView);
+		
 	}
+	
+	
 
 }
