@@ -35,6 +35,7 @@ public class StockCalendarPanel extends JPanel {
 	private JTextField textField;
 	private JYearChooser yearChooser;
 	private JMonthChooser monthChooser;
+	private JTextPane day;
 	
 	public StockCalendarPanel() {
 		initCalendar();
@@ -70,16 +71,17 @@ public class StockCalendarPanel extends JPanel {
 		JPanel dayList = new JPanel(new GridLayout(6, 7));
 		List<JTextPane> dayPanes = new ArrayList<>();
 		
-		for(int i=1; i<7; i++) {
-			for(int j=1; j<8; j++) {
-				JTextPane day = new JTextPane();
+		// 6*7 달력 textPane 객체 생성
+		for(int i=0; i<6; i++) {
+			for(int j=0; j<7; j++) {
+				day = new JTextPane();
 				day.setBorder(new LineBorder(Color.BLACK));
 				dayList.add(day);
 				dayPanes.add(day);
 			}
 		}
 		
-		for (int i = 0; i < 42; i++) {
+		for (int i = 1; i < 42; i++) {
 		    dayPanes.get(i).setText(i + "");
 		}
 		

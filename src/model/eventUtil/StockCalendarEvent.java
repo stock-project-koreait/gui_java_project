@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import Main.MainModel;
 import Main.MainView;
-import model.apiUtil.StockDeividendInfoAPI;
+import model.apiUtil.StockDividendInfoAPI;
 import model.vo.StockDividendInfoVO;
 import view.StockCalendarPanel;
 
@@ -25,11 +25,11 @@ public class StockCalendarEvent {
 				
 				StockCalendarPanel calendarPanel = mainView.getStockCalendarPanel();
 				
-				// 회사 미 입력 시 경고메세지 출력
+				// 회사 미입력 시 경고메세지 출력
 				if(calendarPanel.getTextField().isEmpty()) {
 					showMessage(mainView, "회사를 입력하세요!");
 				} else {
-					StockDeividendInfoAPI.getApi(calendarPanel.getTextField());
+					StockDividendInfoAPI.getApi(calendarPanel.getTextField());
 				}
 				
 				DefaultListModel<StockDividendInfoVO> stockDividendList = mainModel.getStockDividendInfoModel().getStockDividendList();
