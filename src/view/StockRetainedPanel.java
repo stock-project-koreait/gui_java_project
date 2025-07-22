@@ -81,7 +81,6 @@ public class StockRetainedPanel extends JPanel {
 		add(new JScrollPane(table));
 		tablePane.setVisible(false);
 		
-//		StockRetainPanel에 검색 패널을 추가한다
 		add(searchPane);
 		setVisible(true);
 		
