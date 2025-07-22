@@ -13,7 +13,7 @@ import Main.MainModel;
 import Main.MainView;
 import model.StockDividendInfoModel;
 import model.StockInfoModel;
-import model.apiUtil.StockDeividendInfoAPI;
+import model.apiUtil.StockDividendInfoAPI;
 import model.apiUtil.StockInfoAPI;
 import model.apiUtil.StockJson;
 import model.eventUtil.StockInfoEvent;
