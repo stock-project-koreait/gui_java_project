@@ -30,9 +30,11 @@ import controller.StockCalendarController;
 
 public class StockCalendarPanel extends JPanel {
 	
-	JButton selectCompanyBtn;
-	JMonthChooser month;
-	JTextField textField;
+	private JButton selectCompanyBtn;
+	private JMonthChooser month;
+	private JTextField textField;
+	private JYearChooser yearChooser;
+	private JMonthChooser monthChooser;
 	
 	public StockCalendarPanel() {
 		initCalendar();
@@ -53,11 +55,11 @@ public class StockCalendarPanel extends JPanel {
 		selectCompanyBtn.setBounds(600, 25, 109, 55);
 		add(selectCompanyBtn);
 		
-		JYearChooser yearChooser = new JYearChooser();
+		yearChooser = new JYearChooser();
 		yearChooser.setBounds(69, 112, 531, 32);
 		add(yearChooser);
 		
-		JMonthChooser monthChooser = new JMonthChooser();
+		monthChooser = new JMonthChooser();
 		monthChooser.setBounds(602, 112, 107, 32);
 		add(monthChooser);
 		
@@ -89,7 +91,21 @@ public class StockCalendarPanel extends JPanel {
 		add(showDayAndCompany);
 	}
 	
-	public void addbtnClickToPrint(ActionListener actionListener) {
+	// 연도와 월 선택과 회사 입력 후 회사 검색 버튼 클릭 시 달력에 배당락일 보여주는 메서드
+	public void addBtnClickToShowStockDeividendCalendar(ActionListener actionListener) {
 		selectCompanyBtn.addActionListener(actionListener);
+	} // addBtnClickToShowStockDeividendCalendar
+	
+	public String getTextField() {
+		return textField.getText();
+	} // getTextField
+	
+	public int getMonthChooser() {
+		return monthChooser.getMonth() + 1;
+	} // getMonthChooser
+	
+	public int getYearChooser() {
+		return yearChooser.getYear();
 	}
+	
 }

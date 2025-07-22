@@ -26,7 +26,7 @@ public class StockCalendarController {
 		
 		this.stockCalendarEvent = new StockCalendarEvent();
 		
-		stockCalendarEvent.getDate(mainModel, mainView);
+		stockCalendarEvent.getStockDeividendCalendar(mainModel, mainView);
 	}
 	
 	public void loadCalendarData(int year, int month) {
