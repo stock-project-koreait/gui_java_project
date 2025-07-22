@@ -3,8 +3,11 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -21,13 +24,23 @@ public class StockRetainedPanel extends JPanel {
 	
 	JButton getDividendBtn;
 	JTable table;
+	JPanel likeMenuPanel;
+	
 	private DefaultTableModel columnName;
 	private JTextField inputStockNm;
 	private JTextField inputNumberOfHoldings;
 	private String[] tableHeader;
 	
+	private List<String> UIList = null;
+	
+
 	public StockRetainedPanel() {
-//		검색 패널 생성
+		
+//		즐겨찾기한 종목 목록 패널
+		likeMenuPanel = new JPanel(new GridLayout(50, 1, 2, 2));
+		setLayout(new BorderLayout());
+		
+//		메인(search)패널 생성
 		JPanel searchPane = new JPanel();
 
 //		컴포넌트들을 수직으로 배치하기 위해 BoxLayout 사용,
@@ -73,17 +86,17 @@ public class StockRetainedPanel extends JPanel {
 		table = new JTable(columnName);
 		table.setBorder(null);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.getViewport().setBorder(null);
+		
+		
 		
 		add(scrollPane);
 		
 		add(searchPane);
-		
 		setVisible(true);
 		
 	} // StockRetainedPanel
 	
-//	버튼에 이벤트 리스너 등록(컨트롤에서 처리하도록)
+//	버튼에 이벤트 리스너 등록
 	public void showDividendInfoWhenClick(ActionListener actionListener) {
 		getDividendBtn.addActionListener(actionListener);
 	}
@@ -95,6 +108,11 @@ public class StockRetainedPanel extends JPanel {
 	
 	
 //	getter & setter
+	
+	public List<String> getUIList() {
+		return UIList;
+	}
+	
 	public String getCompanyName() {
 		return inputStockNm.getText();
 	}

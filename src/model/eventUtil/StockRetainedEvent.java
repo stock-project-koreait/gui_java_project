@@ -74,15 +74,16 @@ public class StockRetainedEvent {
 		
 		DefaultListModel<StockDividendInfoVO> list = StockDividendInfoAPI.getApi(companyNm);
 		
-		int size = list.getSize();
-		for(int i=size-1; i>0; i--) {
-			if(list.get(i).getCashDvdnPayDt() != null) {
-				mainView.getStockRetainedPanel()
-				.getColumnName()
-				.addRow(list.get(i).getIsinCdNm(), getExpectedDividend(list.get(i), numberOfretainedStock), dividendPaymentsStatusForThisYear());
-			}
-		}
-		
+//		int size = list.getSize();
+//		for(int i=size-1; i>0; i--) {
+//			if(list.get(i).getCashDvdnPayDt() != null) {
+//				mainView.getStockRetainedPanel()
+//				.getColumnName()
+//				.addRow(list.get(i).getIsinCdNm(), getExpectedDividend(list.get(i), numberOfretainedStock), dividendPaymentsStatusForThisYear());
+//			}
+//		}
+		return null;
+//		
 	} // makeList
 	
 //	예상 배당금 계산 후 String으로 바꾸고 리턴해주는 메소드
