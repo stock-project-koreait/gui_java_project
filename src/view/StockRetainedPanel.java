@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -29,6 +31,9 @@ public class StockRetainedPanel extends JPanel {
 	private JTextField inputNumberOfHoldings;
 	private String[] tableHeader;
 	
+	private List<String> UIList = null;
+	
+
 	public StockRetainedPanel() {
 		
 //		즐겨찾기한 종목 목록 패널
@@ -81,7 +86,8 @@ public class StockRetainedPanel extends JPanel {
 		table = new JTable(columnName);
 		table.setBorder(null);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.getViewport().setBorder(null);
+		
+		
 		
 		add(scrollPane);
 		
@@ -90,7 +96,7 @@ public class StockRetainedPanel extends JPanel {
 		
 	} // StockRetainedPanel
 	
-//	버튼에 이벤트 리스너 등록(컨트롤에서 처리하도록)
+//	버튼에 이벤트 리스너 등록
 	public void showDividendInfoWhenClick(ActionListener actionListener) {
 		getDividendBtn.addActionListener(actionListener);
 	}
@@ -102,6 +108,11 @@ public class StockRetainedPanel extends JPanel {
 	
 	
 //	getter & setter
+	
+	public List<String> getUIList() {
+		return UIList;
+	}
+	
 	public String getCompanyName() {
 		return inputStockNm.getText();
 	}
