@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -13,11 +15,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class StockRetainedPanel extends JPanel {
 	
 	JButton getDividendBtn;
 	JTable table;
+	private DefaultTableModel columnName;
 	private JTextField inputStockNm;
 	private JTextField inputNumberOfHoldings;
 	private String[] tableHeader;
@@ -64,15 +68,15 @@ public class StockRetainedPanel extends JPanel {
 		
 		searchPane.add(Box.createVerticalStrut(30));
 		
-		table = new JTable();
-		JPanel tablePane = new JPanel();
-		tablePane.setLayout(new FlowLayout(FlowLayout.CENTER));
+//		table의 컬럼명 설정
+		columnName = new DefaultTableModel(new String[] {"회사명", "예상 배당금", getYear()+"년 배당 지급 현황"}, 1);
+		table = new JTable(columnName);
+		table.setBorder(null);
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.getViewport().setBorder(null);
 		
-		setTableHeader(new String[] {"회사명", "예상 배당금", getYear()+"년 배당 지급 현황"});
-		add(new JScrollPane(table));
-		tablePane.setVisible(false);
+		add(scrollPane);
 		
-//		StockRetainPanel에 검색 패널을 추가한다
 		add(searchPane);
 		
 		setVisible(true);
@@ -106,6 +110,16 @@ public class StockRetainedPanel extends JPanel {
 	public void setTableHeader(String[] tableHeader) {
 		this.tableHeader = tableHeader;
 	}
+
+	public DefaultTableModel getColumnName() {
+		return columnName;
+	}
+
+	public void setColumnName(DefaultTableModel columnName) {
+		this.columnName = columnName;
+	}
+	
+	
 	
 
 } // class

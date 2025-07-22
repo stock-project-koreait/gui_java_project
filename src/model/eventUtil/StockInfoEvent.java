@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 
 import Main.MainModel;
 import Main.MainView;
-import model.apiUtil.StockDeividendInfoAPI;
+import model.apiUtil.StockDividendInfoAPI;
 import model.apiUtil.StockInfoAPI;
 import model.apiUtil.StockJson;
 import model.vo.StockDividendInfoVO;
@@ -68,7 +68,7 @@ public class StockInfoEvent {
 				} // 모델이 있으면 삭제 후 아래 코드 데이터 저장 
 				
 				StockInfoAPI.getStockInfo(stockText);// 주식 정보 모델에 데이터 저장
-				StockDeividendInfoAPI.getApi(stockText); // 배당률 모델에 데이터 저장
+				StockDividendInfoAPI.getApi(stockText); // 배당률 모델에 데이터 저장
 				
 				DefaultListModel<StockDividendInfoVO> stockDividendList = mainModel.getStockDividendInfoModel().getStockDividendList();
 				
