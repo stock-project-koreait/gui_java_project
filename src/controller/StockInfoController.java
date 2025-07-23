@@ -97,9 +97,7 @@ public class StockInfoController {
 		};
 		return btnAction;
 	}
-	
 } //class
-
 
 
 
