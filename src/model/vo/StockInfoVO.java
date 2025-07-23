@@ -1,4 +1,4 @@
-package vo;
+package model.vo;
 
 // 주식 시세정보 api에서 가져온 객체
 public class StockInfoVO {
