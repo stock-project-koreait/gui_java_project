@@ -38,6 +38,6 @@ public class CalendarModel {
 		}
 		
 		return dayList;
-	}
+	} // getCalendarDays
 
 }

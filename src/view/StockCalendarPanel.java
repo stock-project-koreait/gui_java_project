@@ -4,13 +4,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -18,31 +14,21 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
 
-import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
-
-import controller.StockCalendarController;
 
 public class StockCalendarPanel extends JPanel {
 	
 	private JButton selectCompanyBtn;
-	private JMonthChooser month;
 	private JTextField textField;
 	private JYearChooser yearChooser;
 	private JMonthChooser monthChooser;
-	private JTextPane textPane;
 	private JLabel showDayAndCompany;
 	private List<JTextPane> days;
 	
@@ -66,7 +52,7 @@ public class StockCalendarPanel extends JPanel {
 		searchPanel.add(selectCompanyBtn);
 		add(searchPanel);
 		
-		add(Box.createVerticalStrut(20)); // 수직 공백 추가
+		add(Box.createVerticalStrut(20)); // 수직 공백
 		
 		// 년도, 월 선택
 		JPanel chooserPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -81,9 +67,9 @@ public class StockCalendarPanel extends JPanel {
 		monthChooser.setPreferredSize(new Dimension(250, 40));
 		monthChooser.setMaximumSize(new Dimension(250, 40));
 		
-		chooserPanel.add(Box.createHorizontalGlue()); // 왼쪽 여백
+		chooserPanel.add(Box.createHorizontalGlue()); // 왼쪽 공백
 		chooserPanel.add(yearChooser);
-		chooserPanel.add(Box.createHorizontalStrut(20)); // 사이 간격
+		chooserPanel.add(Box.createHorizontalStrut(20)); // 가로 공백
 		chooserPanel.add(monthChooser);
 		
 		add(chooserPanel);
@@ -106,14 +92,14 @@ public class StockCalendarPanel extends JPanel {
 		}
 		add(dayList);
 
-		add(Box.createVerticalStrut(80));
+		add(Box.createVerticalStrut(80)); // 수직 공백
 		
 		// 결과 출력
 		showDayAndCompany = new JLabel("배당락일", SwingConstants.CENTER);
 		showDayAndCompany.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		showDayAndCompany.setPreferredSize(new Dimension(300, 60));
 		
-		// 최대 크기 부모 패널 가로 길이와 같거나 넉넉하게 지정
+		// 최대 크기 부모 패널 가로 길이와 같게 지정
 		showDayAndCompany.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
 		showDayAndCompany.setMinimumSize(new Dimension(300, 60));
 
@@ -122,12 +108,12 @@ public class StockCalendarPanel extends JPanel {
 		add(showDayAndCompany);
 		
 		add(Box.createVerticalStrut(100));
-	}
+	} // initCalendar
 	
 	// 년도, 월, 회사 이름 입력 후 회사 검색 클릭 시 해당 회사의 배당락일 캘린더에 표시
 	public void addbtnClickToShowDividendCalendar(ActionListener actionListener) {
 		selectCompanyBtn.addActionListener(actionListener);
-	} // addbtnClickToShowDividendCalendar
+	} // addbtnClickToShowDividendCalendar	
 	
 	// 선택한 월
 	public int getMonthChooser() {
