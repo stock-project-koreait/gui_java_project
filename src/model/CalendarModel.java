@@ -33,9 +33,7 @@ public class CalendarModel {
 			dayList.add(String.valueOf(i));
 		}
 		
-		int dayListSize = dayList.size();
-		// maxDay까지 넣고 남은 일 수
-		while(dayListSize < 42) {
+		while(dayList.size() < 42) {
 			dayList.add("");
 		}
 		
