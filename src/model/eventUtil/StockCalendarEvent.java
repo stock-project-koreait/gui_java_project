@@ -35,7 +35,7 @@ public class StockCalendarEvent {
 				
 				StockCalendarPanel calendarPanel = mainView.getStockCalendarPanel();
 				String companyName = calendarPanel.getTextField();
-				int month = calendarPanel.getMonthChooser()+1;
+				int month = calendarPanel.getMonthChooser();
 				int year = calendarPanel.getYearChooser();
 				
 				// 회사 미입력 시 경고창 출력
@@ -46,9 +46,6 @@ public class StockCalendarEvent {
 				getCalendarDaysToView(mainView, month, year);
 				
 				// 날짜들을 담은 데이터리스트에서 배당락일과 같으면 색깔 변경
-//				if() {
-//					
-//				}
 				
 				// 배당금정보 모델에서 가져온 리스트를 stockDividendList 변수에 담음
 				DefaultListModel<StockDividendInfoVO> stockDividendList = mainModel.getStockDividendInfoModel().getStockDividendList();
@@ -63,6 +60,10 @@ public class StockCalendarEvent {
 				
 				List<Date> dateList = getStringToDate(strDvdnLit);
 
+				int apiYear = 0;
+				int apiMonth = 0;
+				int apiDay = 0;
+				
 				for(Date date : dateList) {
 					
 					Calendar calendar = Calendar.getInstance();
@@ -70,25 +71,31 @@ public class StockCalendarEvent {
 					
 					calendar.add(Calendar.DATE, -2);
 
-					int apiYear = calendar.get(Calendar.YEAR);
-					int apiMonth = calendar.get(Calendar.MONTH)+1;
-					int apiDay = calendar.get(Calendar.DATE);
+					apiYear = calendar.get(Calendar.YEAR);
+					apiMonth = calendar.get(Calendar.MONTH)+1;
+					apiDay = calendar.get(Calendar.DATE);
 					
-//					System.out.println(apiYear);
-//					System.out.println(apiMonth);
-//					System.out.println(apiDay);
-//					System.out.println(year);
-//					System.out.println(month);
-					
-					for(String day : dayStrings) {
-						if(apiYear == year && apiMonth == month) {
-							System.out.println("년도와 월이 맞음");
-							System.out.println(day);
+					if(apiYear == year && apiMonth == (month+1)) {
+						
+						int dayStringsSize = dayStrings.size();
+						for(int i=0; i<dayStringsSize; i++) {
+							String strday = dayStrings.get(i);
+							
+							try {
+								int dayValue = Integer.parseInt(strday);
+								if(dayValue == apiDay) {
+									days.get(i).setBackground(Color.CYAN);
+									
+									calendarPanel.getShowDayAndCompany()
+										.setText(companyName + " 배당락일");
+									
+								} 
+							} catch (NumberFormatException nfe) {
+								continue;
+							}
 						}
 						
 					}
-					
-					
 				}
 				
 				
@@ -115,6 +122,8 @@ public class StockCalendarEvent {
 		// days textPane에 dayStrings를 days 길이에 맞게 넣음
 		for (int i = 0; i < daysSize; i++) {
 			days.get(i).setText(dayStrings.get(i));
+			
+			days.get(i).setBackground(Color.WHITE);
 		}
 		
 	} // getCalendarDaysToView
@@ -148,7 +157,7 @@ public class StockCalendarEvent {
 					.map(day -> {
 						try {
 							return sdf.parse(day.toString()); // format으로 date로 변경
-						} catch (ParseException e) {
+						} catch (Exception e) {
 							e.printStackTrace();
 						}
 						return null;

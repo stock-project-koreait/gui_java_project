@@ -135,4 +135,8 @@ public class StockCalendarPanel extends JPanel {
 		return days;
 	} // getDaysList
 	
+	public JLabel getShowDayAndCompany() {
+		return showDayAndCompany;
+	} // getShowDayAndCompany
+	
 }
