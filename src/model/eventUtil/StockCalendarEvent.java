@@ -116,6 +116,7 @@ public class StockCalendarEvent {
 		
 		// 연도와 월에 맞는 캘린더 날짜들을 담고 있는 getCalendarDays메서드 호출
 		// view에서 선택한 연도, 월에 맞는 날짜들을 dayStrings list에 담음
+		// ex) [, , 1, 2, 3, ....., 31, , ,]
 		dayStrings = calendarModel.getCalendarDays(year, month);
 
 		int daysSize = days.size();
@@ -127,6 +128,13 @@ public class StockCalendarEvent {
 		}
 		
 	} // getCalendarDaysToView
+	
+	// 배당락일 주말, 공휴일 제외
+	public void weekendAndHolyDay(Calendar calendar, MainView mainView) {
+	
+		
+		
+	}
 	
 	public void companyIsEmptyToShowMessage(MainView mainView, String companyName) {
 		
