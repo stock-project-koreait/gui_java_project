@@ -8,6 +8,7 @@ import javax.swing.DefaultListModel;
 
 import Main.MainModel;
 import Main.MainView;
+import model.CalendarModel;
 import model.apiUtil.StockDividendInfoAPI;
 import model.eventUtil.StockCalendarEvent;
 import model.vo.StockDividendInfoVO;
@@ -25,7 +26,14 @@ public class StockCalendarController {
 		
 		this.stockCalendarEvent = new StockCalendarEvent();
 		
-		stockCalendarEvent.getDate(mainModel, mainView);
+		stockCalendarEvent.getStockDeividendCalendar(mainModel, mainView);
+	}
+	
+	// calendarModel에서 캘린더 데이터 가져옴
+	public void loadCalendarData(int year, int month) {
+		
+		CalendarModel calendarModel = new CalendarModel();
+		List<String> days = calendarModel.getCalendarDays(year, month);
 	}
 
 }

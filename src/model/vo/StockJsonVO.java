@@ -1,8 +1,12 @@
 package model.vo;
 
-// json 서버에서 가져온 주식 객체
-public class StockJsonVO {
+import java.io.Serializable;
 
+// json 서버에서 가져온 주식 객체
+public class StockJsonVO implements Serializable{
+
+	private static final long serialVersionUID = 659521212121564654L;
+	
 	private int id; // 아이디
 	private String name; // 주식종목명
 	private String category; // 회사 업종
