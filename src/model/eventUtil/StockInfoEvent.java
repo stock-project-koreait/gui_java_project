@@ -67,10 +67,13 @@ public class StockInfoEvent {
 					//mainModel.getStockInfoModel().getStockInfoList().removeAllElements();
 				} // 모델이 있으면 삭제 후 아래 코드 데이터 저장 
 				
-				StockInfoAPI.getStockInfo(stockText);// 주식 정보 모델에 데이터 저장
-				StockDividendInfoAPI.getApi(stockText); // 배당률 모델에 데이터 저장
+				// 주식 정보 모델에 데이터 저장하기 위해 메소드 호출 stockInfoList 에 데이터 저장
+				StockInfoAPI.getStockInfo(stockText);
+				// 배당률 모델에 데이터 저장하기 위해 메소드 호출 getStockDividendList 에 데이터 저장
+				StockDividendInfoAPI.getApi(stockText);
 				
-				DefaultListModel<StockDividendInfoVO> stockDividendList = mainModel.getStockDividendInfoModel().getStockDividendList();
+				DefaultListModel<StockDividendInfoVO> stockDividendList =
+							mainModel.getStockDividendInfoModel().getStockDividendList();
 				
 				int listSize = stockDividendList.size();
 				
@@ -79,7 +82,6 @@ public class StockInfoEvent {
 				StockInfoVO SIVO_first = stockInfoList.get(0);
 				StockDividendInfoVO SDIVO_last
 				= stockDividendList.get(listSize-1);
-				
 				
 				mainView.getStockInfoPanel().getStockName().setText(stockText);
 				IPMG.getLblSysdate().setText(formattedNow);
