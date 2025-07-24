@@ -73,9 +73,8 @@ public class StockRetainedEvent {
 		.getColumnName()
 		.addRow(new Object[] {
 				StockRetainedPanel.getCompanyName(), // 회사 이름
-				StockRetainedPanel.getCompanyName(), // 회사 이름
 //				getExpectedDividend(객체,numberOfretainedStock), // 예상 배당금 계산 결과
-				getDividendPaymentsatus(mainView, mainModel) // 올해 배당금 지급 현황
+//				getDividendPaymentsatus(mainView, mainModel) // 올해 배당금 지급 현황
 			}); 
 		
 	} // makeList
@@ -93,7 +92,8 @@ public class StockRetainedEvent {
 //		올해 현금배당지급일(String) 리스트를 Date타입 리스트로 저장
 		List<Date> dateList = getStringToDate(getSelectDateForThisYearList(mainView, mainModel));
 		
-		Collections.sort(dateList); // 가장 오래된 날짜부터 정렬(오름차순)
+//		Collections.sort(dateList); // 가장 오래된 날짜부터 정렬(오름차순)
+		System.out.println(dateList);
 
 		SimpleDateFormat monthFormat = new SimpleDateFormat("M"); // 월만 추출(1~12)
 		List<String> monthList = new ArrayList<String>();
@@ -112,12 +112,11 @@ public class StockRetainedEvent {
 			String m = monthList.get(i);
 			sb.append(m);
 			if(i != size-1) { // 마지막 인덱스가 아닐 경우
-				sb.append(", ");
+				sb.append("월, ");
 			} else {
 				sb.append(" (총 "+size+"번)");
 			}
 		}
-		
 		
 		return dividendPaymentsatus;
 			
@@ -131,49 +130,57 @@ public class StockRetainedEvent {
 		String companyNm = mainView.getStockRetainedPanel().getCompanyName();
 		String currentYear = StockRetainedPanel.getYear();
 		
+		
 //		리턴할 리스트 초기화
 		List<String> selectDateList = new ArrayList<String>();
 		
+		StockDividendInfoAPI.getApi(companyNm);
+		
 //		api에서 가져온 회사의 배당 정보
-		DefaultListModel<StockDividendInfoVO> list = StockDividendInfoAPI.getApi(companyNm);
+		DefaultListModel<StockDividendInfoVO> list = mainModel.getStockDividendInfoModel().getStockDividendList();
 		
 		int size = list.getSize();
 		
-		for(int i=0; i<size; i++) {
-			String date = list.get(i).getCashDvdnPayDt(); // api 데이터에 있는 날짜
-			String year = date.substring(0, 4);
-			if(date!=null&&year.equals(currentYear)) { // 현재 년도와 같을 경우에만 가져옴
+		for(int i=0; i<size-1; i++) {
+			String date = list.get(i).getCashDvdnPayDt().toString(); // api 데이터에 있는 날짜
+			String year = date.substring(0, 5);
+			System.out.println(year.length());
+			System.out.println("date 길이"+date.length());
+			if(!date.isEmpty()&&year.equals(currentYear)) { // 현재 년도와 같을 경우에만 가져옴
 				selectDateList.add(date);
 			}
+			System.out.println(selectDateList);
+
 		}
+		
 		return selectDateList; 
 	}
 	
 	
 //	제일 최근 배당 정보 객체를 리턴하는 메소드
-	public static DefaultListModel<StockDividendInfoVO> getRecentDividendInfo(MainView mainView, MainModel mainModel) {
-		
-		String companyNm = mainView.getStockRetainedPanel().getCompanyName();
-		
-		DefaultListModel<StockDividendInfoVO> list = StockDividendInfoAPI.getApi(companyNm);
-		
-//		데이트 포맷
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		int size = list.getSize();
-		
-		try {
-			
-			Date curruntDate = sdf.parse(String.valueOf(LocalDate.now()));
-			Date apiDate = sdf.parse();
-			
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
-		} // 현재 년월일
-
-		
-		
-	}
+//	public static DefaultListModel<StockDividendInfoVO> getRecentDividendInfo(MainView mainView, MainModel mainModel) {
+//		
+//		String companyNm = mainView.getStockRetainedPanel().getCompanyName();
+//		
+//		DefaultListModel<StockDividendInfoVO> list = StockDividendInfoAPI.getApi(companyNm);
+//		
+////		데이트 포맷
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+//		int size = list.getSize();
+//		
+//		try {
+//			
+//			Date curruntDate = sdf.parse(String.valueOf(LocalDate.now()));
+//			Date apiDate = sdf.parse();
+//			
+//			
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		} // 현재 년월일
+//
+//		
+//		
+//	}
 	
 	
 	// String인 날짜 List 요소들을 Date 타입으로 변환 후 List에 담음
