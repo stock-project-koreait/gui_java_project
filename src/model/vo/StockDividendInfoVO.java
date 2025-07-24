@@ -1,8 +1,12 @@
 package model.vo;
 
-//주식 배당금 정보 api에서 가져온 객체
-public class StockDividendInfoVO {
+import java.io.Serializable;
 
+//주식 배당금 정보 api에서 가져온 객체
+public class StockDividendInfoVO implements Serializable{
+
+	private static final long serialVersionUID = 65315165548554235L;
+	
 	private String isinCdNm; // 회사이름
 	private String dvdnBasDt; // 배당기준일
 	private String cashDvdnPayDt; // 현금지급일
