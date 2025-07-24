@@ -27,6 +27,7 @@ public class StockTablePanel extends JPanel {
 
 	public StockTablePanel() {
 
+		// 생성자 안에 메소드 실행
 		initializeComponents();
 		setupLayout();
 	}
@@ -55,7 +56,7 @@ public class StockTablePanel extends JPanel {
 		// JTable 생성
 		stockTable = new JTable(tableModel);
 		stockTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		stockTable.setRowHeight(25);
+		stockTable.setRowHeight(30);
 
 		// 컬럼 너비 설정
 		TableColumnModel columnModel = stockTable.getColumnModel();

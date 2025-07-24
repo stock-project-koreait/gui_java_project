@@ -94,12 +94,8 @@ public class StockCalendarEvent {
 								continue;
 							}
 						}
-						
 					}
 				}
-				
-				
-				
 			}
 		});
 
