@@ -69,13 +69,12 @@ public class StockRetainedEvent {
 		String retainedStock = mainView.getStockRetainedPanel().getNumberOfHoldings(); // 사용자가 입력한 보유 주식 수
 		int numberOfretainedStock = Integer.parseInt(retainedStock);
 		
-		
-		
 		mainView.getStockRetainedPanel()
 		.getColumnName()
 		.addRow(new Object[] {
 				StockRetainedPanel.getCompanyName(), // 회사 이름
-				getExpectedDividend(객체,numberOfretainedStock), // 예상 배당금 계산 결과
+				StockRetainedPanel.getCompanyName(), // 회사 이름
+//				getExpectedDividend(객체,numberOfretainedStock), // 예상 배당금 계산 결과
 				getDividendPaymentsatus(mainView, mainModel) // 올해 배당금 지급 현황
 			}); 
 		
@@ -91,24 +90,35 @@ public class StockRetainedEvent {
 //	배당금 지급 현황을 String으로 리턴하는 메소드
 	public static String getDividendPaymentsatus(MainView mainView, MainModel mainModel) {
 		
+//		올해 현금배당지급일(String) 리스트를 Date타입 리스트로 저장
 		List<Date> dateList = getStringToDate(getSelectDateForThisYearList(mainView, mainModel));
 		
 		Collections.sort(dateList); // 가장 오래된 날짜부터 정렬(오름차순)
 
-		dateList.stream()
-			// String으로 바꾼 뒤 month만 저장
-			.forEach(date -> date.toString().substring(6, 6)); 
+		SimpleDateFormat monthFormat = new SimpleDateFormat("M"); // 월만 추출(1~12)
+		List<String> monthList = new ArrayList<String>();
 		
-		int size = dateList.size();
-		String dividendPaymentsatus = ""; // 최종적으로 리턴할 문자열
+		for(Date date : dateList) {
+//			현금배당지급 날짜에서 월만 뺀 후 문자열로 저장
+			String month = monthFormat.format(date);
+			monthList.add(month);
+		}
 		
+		String dividendPaymentsatus = "";
+		StringBuilder sb = new StringBuilder();
+		
+		int size = monthList.size();
 		for(int i=0; i<size; i++) {
-			if(!(dateList.indexOf(dateList.get(i)) == size-1)) { // 마지막 요소가 아니라면
-				dividendPaymentsatus = dateList.get(i) + "월, ";
-			} else { // 마지막 요소일 경우
-				dividendPaymentsatus = dateList.get(i) + "월 (총 " + size + "번)";
+			String m = monthList.get(i);
+			sb.append(m);
+			if(i != size-1) { // 마지막 인덱스가 아닐 경우
+				sb.append(", ");
+			} else {
+				sb.append(" (총 "+size+"번)");
 			}
 		}
+		
+		
 		return dividendPaymentsatus;
 			
 	} // getDividendPaymentsatus
@@ -119,7 +129,7 @@ public class StockRetainedEvent {
 	public static List<String> getSelectDateForThisYearList(MainView mainView, MainModel mainModel) {
 		
 		String companyNm = mainView.getStockRetainedPanel().getCompanyName();
-		String curruntYear = StockRetainedPanel.getYear();
+		String currentYear = StockRetainedPanel.getYear();
 		
 //		리턴할 리스트 초기화
 		List<String> selectDateList = new ArrayList<String>();
@@ -132,7 +142,7 @@ public class StockRetainedEvent {
 		for(int i=0; i<size; i++) {
 			String date = list.get(i).getCashDvdnPayDt(); // api 데이터에 있는 날짜
 			String year = date.substring(0, 4);
-			if(!date.isEmpty()&&year.equals(curruntYear)) { // 현재 년도와 같을 경우에만 가져옴
+			if(date!=null&&year.equals(currentYear)) { // 현재 년도와 같을 경우에만 가져옴
 				selectDateList.add(date);
 			}
 		}
@@ -154,7 +164,7 @@ public class StockRetainedEvent {
 		try {
 			
 			Date curruntDate = sdf.parse(String.valueOf(LocalDate.now()));
-			
+			Date apiDate = sdf.parse();
 			
 			
 		} catch (ParseException e) {
