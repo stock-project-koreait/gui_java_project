@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,11 +28,11 @@ public class StockRetainedPanel extends JPanel {
 	JPanel likeMenuPanel;
 	
 	private DefaultTableModel columnName;
-	private JTextField inputStockNm;
+	private static JTextField inputStockNm;
 	private JTextField inputNumberOfHoldings;
 	private String[] tableHeader;
 	
-	private List<String> UIList = null;
+	private JList<String> UIList = null;
 	
 
 	public StockRetainedPanel() {
@@ -47,7 +48,7 @@ public class StockRetainedPanel extends JPanel {
 //		Y_AXIS를 사용해 수직 배치
 		searchPane.setLayout(new BoxLayout(searchPane, BoxLayout.Y_AXIS));
 		
-		searchPane.add(Box.createVerticalStrut(60)); // 수직 간격
+		add(Box.createVerticalStrut(60)); // 수직 간격
 		
 //		컴포넌트 생성
 		JPanel panel1 = new JPanel();
@@ -82,16 +83,14 @@ public class StockRetainedPanel extends JPanel {
 		searchPane.add(Box.createVerticalStrut(30));
 		
 //		table의 컬럼명 설정
-		columnName = new DefaultTableModel(new String[] {"회사명", "예상 배당금", getYear()+"년 배당 지급 현황"}, 1);
+		columnName = new DefaultTableModel(new String[] {"회사명", "예상 배당금", getYear()+"년 배당 지급 현황"}, 0);
 		table = new JTable(columnName);
-		table.setBorder(null);
 		JScrollPane scrollPane = new JScrollPane(table);
 		
 		
-		
-		add(scrollPane);
-		
-		add(searchPane);
+		add(scrollPane, BorderLayout.CENTER);       // 테이블 중앙
+		add(searchPane, BorderLayout.SOUTH);        // 검색창은 아래에
+
 		setVisible(true);
 		
 	} // StockRetainedPanel
@@ -102,18 +101,14 @@ public class StockRetainedPanel extends JPanel {
 	}
 
 // 올해 년도를 구하는 메소드
-	public String getYear() {
+	public static String getYear() {
 		return String.valueOf(LocalDate.now().getYear());
 	}
 	
 	
 //	getter & setter
 	
-	public List<String> getUIList() {
-		return UIList;
-	}
-	
-	public String getCompanyName() {
+	public static String getCompanyName() {
 		return inputStockNm.getText();
 	}
 	
