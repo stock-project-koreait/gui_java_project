@@ -1,8 +1,12 @@
 package model.vo;
 
-// 주식 시세정보 api에서 가져온 객체
-public class StockInfoVO {
+import java.io.Serializable;
 
+// 주식 시세정보 api에서 가져온 객체
+public class StockInfoVO implements Serializable {
+
+	private static final long serialVersionUID = 48465452154544545L;
+	
 	private String mrktTotAmt; // 시가총액
 	private String isinCd; // isinCd
 	private String mkp; // 시가
