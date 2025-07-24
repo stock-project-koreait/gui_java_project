@@ -1,7 +1,6 @@
 package model.eventUtil;
 
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,58 +34,58 @@ public class StockRetainedEvent {
       });
    } // buttonClickEvent
 
-	/*
-	 * [기능 별 메소드] 
-	 * 1. 가장 최근 데이터 중에 
-	 * 2. api 리스트 안에서 가장 최근 배당 데이터 리턴 
-	 * 3. 최근 지급한 1주당 배당금 리턴 
-	 * 4. 보유 주식 수 * 1주당 배당금 곱해서 다음 배당 지급일에 받을 배당금 리턴
-	 */
-	
-	
-//	사용자 입력 값을 검증하는 메소드
-	public void verifiyingInputValue(MainModel mainModel, MainView mainView) {
-		
-		String companyNm = mainView.getStockRetainedPanel().getCompanyName();
-		String retainedStock = mainView.getStockRetainedPanel().getNumberOfHoldings();
-		
-		if (companyNm.isEmpty()) {
-			JOptionPane.showMessageDialog(mainView, "주식명을 입력해 주세요.", "information", 
-					JOptionPane.INFORMATION_MESSAGE);
-		} else if (retainedStock.isEmpty()) {
-			JOptionPane.showMessageDialog(mainView, "보유 주식 수를 입력해 주세요.", "information",
-					JOptionPane.INFORMATION_MESSAGE);
-		} else if (companyNm.isEmpty() && retainedStock.isEmpty()) {
-			JOptionPane.showMessageDialog(mainView, "주식명과 보유 주식 수를 입력해 주세요.", "information",
-					JOptionPane.INFORMATION_MESSAGE);
-		} else {
-			makeList(mainModel, mainView); 
-		}
-	} // getUIList
-	
-	
-	public void makeList(MainModel mainModel, MainView mainView) {
-		String companyNm = mainView.getStockRetainedPanel().getCompanyName(); // 사용자가 입력한 회사명
-		String retainedStock = mainView.getStockRetainedPanel().getNumberOfHoldings(); // 사용자가 입력한 보유 주식 수
-		int numberOfretainedStock = Integer.parseInt(retainedStock);
-		
-		mainView.getStockRetainedPanel()
-		.getColumnName()
-		.addRow(new Object[] {
-				StockRetainedPanel.getCompanyName(), // 회사 이름
-//				getExpectedDividend(객체,numberOfretainedStock), // 예상 배당금 계산 결과
-				getDividendPaymentsatus(mainView, mainModel) // 올해 배당금 지급 현황
-			}); 
-		
-	} // makeList
+   /*
+    * [기능 별 메소드] 
+    * 1. 가장 최근 데이터 중에 
+    * 2. api 리스트 안에서 가장 최근 배당 데이터 리턴 
+    * 3. 최근 지급한 1주당 배당금 리턴 
+    * 4. 보유 주식 수 * 1주당 배당금 곱해서 다음 배당 지급일에 받을 배당금 리턴
+    */
+   
+   
+//   사용자 입력 값을 검증하는 메소드
+   public void verifiyingInputValue(MainModel mainModel, MainView mainView) {
+      
+      String companyNm = mainView.getStockRetainedPanel().getCompanyName();
+      String retainedStock = mainView.getStockRetainedPanel().getNumberOfHoldings();
+      
+      if (companyNm.isEmpty()) {
+         JOptionPane.showMessageDialog(mainView, "주식명을 입력해 주세요.", "information", 
+               JOptionPane.INFORMATION_MESSAGE);
+      } else if (retainedStock.isEmpty()) {
+         JOptionPane.showMessageDialog(mainView, "보유 주식 수를 입력해 주세요.", "information",
+               JOptionPane.INFORMATION_MESSAGE);
+      } else if (companyNm.isEmpty() && retainedStock.isEmpty()) {
+         JOptionPane.showMessageDialog(mainView, "주식명과 보유 주식 수를 입력해 주세요.", "information",
+               JOptionPane.INFORMATION_MESSAGE);
+      } else {
+         makeList(mainModel, mainView); 
+      }
+   } // getUIList
+   
+   
+   public void makeList(MainModel mainModel, MainView mainView) {
+      String companyNm = mainView.getStockRetainedPanel().getCompanyName(); // 사용자가 입력한 회사명
+      String retainedStock = mainView.getStockRetainedPanel().getNumberOfHoldings(); // 사용자가 입력한 보유 주식 수
+      int numberOfretainedStock = Integer.parseInt(retainedStock);
+      
+      mainView.getStockRetainedPanel()
+      .getColumnName()
+      .addRow(new Object[] {
+            StockRetainedPanel.getCompanyName(), // 회사 이름
+//            getExpectedDividend(객체,numberOfretainedStock), // 예상 배당금 계산 결과
+            getDividendPaymentsatus(mainView, mainModel) // 올해 배당금 지급 현황
+         }); 
+      
+   } // makeList
 
-	
-//	예상 배당금 계산 후 String으로 바꾸고 리턴해주는 메소드
-	public String getExpectedDividend(StockDividendInfoVO obj, int numberOfretainedStock) {
-		return Integer.toString(Integer.parseInt(obj.getStckGenrDvdnAmt()) * numberOfretainedStock) + " 원";
-	} // getExpectedDividend
-
-	
+   
+//   예상 배당금 계산 후 String으로 바꾸고 리턴해주는 메소드
+   public String getExpectedDividend(StockDividendInfoVO obj, int numberOfretainedStock) {
+      return Integer.toString(Integer.parseInt(obj.getStckGenrDvdnAmt()) * numberOfretainedStock) + " 원";
+   } // getExpectedDividend
+   
+   
 //   배당금 지급 현황을 String으로 리턴하는 메소드
    public static String getDividendPaymentsatus(MainView mainView, MainModel mainModel) {
       
@@ -148,6 +147,7 @@ public class StockRetainedEvent {
       
       return selectDateList; 
    }
+   
    
 //   제일 최근 배당 정보 객체를 리턴하는 메소드
 //   public static DefaultListModel<StockDividendInfoVO> getRecentDividendInfo(MainView mainView, MainModel mainModel) {
