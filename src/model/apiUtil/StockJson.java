@@ -13,8 +13,10 @@ import com.google.gson.GsonBuilder;
 
 import model.StockJsonModel;
 import model.vo.StockJsonVO;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 // 주식 제목, 시가, 종가 등을 호출하는 json
@@ -53,6 +55,40 @@ public class StockJson {
 
 		return StockJsonModel.getStockJsonList();
 	} // getJson
+	
+	// 즐겨찾기 여부 변경
+	public static void patchJson(String id, Boolean isLike) {
+		// request 요청 객체 만들기
+		String jsonBody;
+		
+		// 파라미터를 Boolean 으로 바꿔야 잘 작동한다.
+		if(isLike) {
+			jsonBody = "{\"isLike\" : " + (boolean)false + "}";
+		}else {
+			jsonBody = "{\"isLike\" : " + (boolean)true + "}";
+		}
+		//String jsonBody = "{\"isLike\" : " + (isLike.equals('X') ? (boolean)false : (boolean)true) + "}";
+		
+	    RequestBody body = RequestBody.create(MediaType.get("application/json; charset=utf-8"), jsonBody);
+	    Request request = new Request.Builder()
+	        .url("http://localhost:3000/stock/" + id)
+	        .patch(body)
+	        .build();
+	
+		try {
+			Response response = client.newCall(request).execute();
+			// 리스트 삭제후 새로 고침
+			StockJsonModel.getStockJsonList().removeAllElements();
+			getJson();
+			System.out.println("put 요청 성공!");
+			
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	} // getJson
+	
+	
+	
 }
 
 
