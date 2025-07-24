@@ -74,7 +74,7 @@ public class StockRetainedEvent {
 		.addRow(new Object[] {
 				StockRetainedPanel.getCompanyName(), // 회사 이름
 //				getExpectedDividend(객체,numberOfretainedStock), // 예상 배당금 계산 결과
-//				getDividendPaymentsatus(mainView, mainModel) // 올해 배당금 지급 현황
+				getDividendPaymentsatus(mainView, mainModel) // 올해 배당금 지급 현황
 			}); 
 		
 	} // makeList
@@ -143,9 +143,7 @@ public class StockRetainedEvent {
 		
 		for(int i=0; i<size-1; i++) {
 			String date = list.get(i).getCashDvdnPayDt().toString(); // api 데이터에 있는 날짜
-			String year = date.substring(0, 5);
-			System.out.println(year.length());
-			System.out.println("date 길이"+date.length());
+			String year = date.substring(0, 4);
 			if(!date.isEmpty()&&year.equals(currentYear)) { // 현재 년도와 같을 경우에만 가져옴
 				selectDateList.add(date);
 			}
