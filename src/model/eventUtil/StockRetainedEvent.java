@@ -83,7 +83,6 @@ public class StockRetainedEvent {
    
 //   예상 배당금 계산 후 String으로 바꾸고 리턴해주는 메소드
    public String getExpectedDividend(StockDividendInfoVO obj, int numberOfretainedStock) {
-	   System.out.println(obj);
       return Integer.toString(Integer.parseInt(obj.getStckGenrDvdnAmt()) * numberOfretainedStock) + " 원";
    } // getExpectedDividend
    
@@ -139,8 +138,8 @@ public class StockRetainedEvent {
       DefaultListModel<StockDividendInfoVO> list = mainModel.getStockDividendInfoModel().getStockDividendList();
       
       int size = list.getSize();
-      for(int i=0; i<size-1; i++) {
-         String date = list.get(i).getCashDvdnPayDt().toString(); // api 데이터에 있는 날짜
+      for(int i=0; i<size; i++) {
+         String date = list.get(i).getCashDvdnPayDt(); // api 데이터에 있는 날짜
          if(date!=null && !date.isEmpty()) {
         	 String year = date.substring(0, 4);
              if(year.equals(currentYear)) { // 현재 년도와 같을 경우에만 가져옴
