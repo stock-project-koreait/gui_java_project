@@ -165,22 +165,10 @@ public class StockRetainedEvent {
     	  stockList.add(list.get(i));
       }
       
-      /*
-       비교하다가 마지막 인덱스까지 왔을 경우 -> 마지막 인덱스 객체 반환
-       */
+      stockList.stream()
+      	.max(Comparator.comparingInt(vo -> Integer.parseInt(vo.getCashDvdnPayDt())))
+      	.orElse(null);
       
-      StockDividendInfoVO recent = null;
-      int bigger = 0;
-      
-      for(StockDividendInfoVO obj : stockList) {
-    	  String currStr = obj.getCashDvdnPayDt();
-    	  if(currStr!=null && !currStr.isEmpty()) {
-//    		  날짜를 int로 바꿔서 크기 비교
-    		  int currDateForInt = Integer.parseInt(currStr);
-    		  if(currDateForInt > bigger) bigger = currDateForInt; // 제일 큰 수를 현재 날짜값으로 설정
-    		  else return obj;
-    	  }
-      }
 
       
       
