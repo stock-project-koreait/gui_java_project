@@ -72,7 +72,7 @@ public class StockTableEvent {
 	            
 	            // 4번째 열(인덱스 3) 클릭 시만 동작
 	            if (col == 3) {
-	            	if(isLikeValue == "X") {
+	            	if((Boolean)isLikeValue == false) {
 		                int result = JOptionPane.showConfirmDialog(
 			                    mainView.getStockTablePanel(),
 			                    "즐겨찾기를 추가하시겠습니까?",

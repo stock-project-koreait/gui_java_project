@@ -27,6 +27,11 @@ public class StockInfoEvent {
 		mainView.getStockInfoPanel().infoClick(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				if(mainModel.getStockJsonModel().getStockJsonList() != null) {
+					mainModel.getStockJsonModel().getStockJsonList().removeAllElements();
+				}
+				
 				StockJson.getJson();
 				
 				DefaultListModel<StockJsonVO> stockJsonList = mainModel.getStockJsonModel().getStockJsonList();
