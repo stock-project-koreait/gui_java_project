@@ -37,9 +37,7 @@ public class StockInfoController {
 		stockInfoEvent.getInfoList(mainModel, mainView);
 		
 	}
-	
 } //class
-
 
 
 

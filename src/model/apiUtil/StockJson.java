@@ -1,6 +1,7 @@
 package model.apiUtil;
 
 import java.io.IOException;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -8,22 +9,20 @@ import java.util.Objects;
 import javax.swing.DefaultListModel;
 
 import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import model.StockJsonModel;
+import model.apiUtil.constant.ApiConstant;
 import model.vo.StockJsonVO;
-import okhttp3.OkHttpClient;
+import okhttp3.MediaType;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 // 주식 제목, 시가, 종가 등을 호출하는 json
 public class StockJson {
 
-	// 통신 객체 (HTTP Client : HTTP 요청을 보내고 응답받는 객체)
-	private static final OkHttpClient client = new OkHttpClient();
-	// Gson 객체
-	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+
 
 	public static DefaultListModel<StockJsonVO> getJson() {
 		// request 요청 객체 만들기
@@ -31,10 +30,10 @@ public class StockJson {
 
 		try {
 
-			Response response = client.newCall(request).execute();
+			Response response = ApiConstant.client.newCall(request).execute();
 			String json = Objects.requireNonNull(response.body()).string();
-			List<Map<String, Object>> data = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {
-			}.getType());
+			List<Map<String, Object>> data =
+					ApiConstant.gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
 
 			for (Map<String, Object> item : data) {
 				int id = Integer.parseInt(item.get("id").toString());
@@ -53,21 +52,46 @@ public class StockJson {
 
 		return StockJsonModel.getStockJsonList();
 	} // getJson
-
-	public static void getJsonTest() {
+	
+	// 즐겨찾기 여부 변경
+	public static void patchJson(String id, Boolean isLike) {
 		// request 요청 객체 만들기
-		Request request = new Request.Builder().url("http://localhost:3000/stock").build();
+		String jsonBody;
+		
+		// 파라미터를 Boolean 으로 바꿔야 잘 작동한다.
+		if(isLike) {
+			jsonBody = "{\"isLike\" : " + (boolean)false + "}";
+		}else {
+			jsonBody = "{\"isLike\" : " + (boolean)true + "}";
+		}
+		//String jsonBody = "{\"isLike\" : " + (isLike.equals('X') ? (boolean)false : (boolean)true) + "}";
+		
+	    RequestBody body = RequestBody.create(MediaType.get("application/json; charset=utf-8"), jsonBody);
+	    Request request = new Request.Builder()
+	        .url("http://localhost:3000/stock/" + id)
+	        .patch(body)
+	        .build();
+	
 		try {
-			Response response = client.newCall(request).execute();
-			String json = Objects.requireNonNull(response.body()).string();
-			List<Map<String, Object>> data = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {
-			}.getType());
-
-			System.out.println(((Number) data.get(0).get("count")).intValue());
-
+			Response response = ApiConstant.client.newCall(request).execute();
+			// 리스트 삭제후 새로 고침
+			StockJsonModel.getStockJsonList().removeAllElements();
+			getJson();
+			System.out.println("put 요청 성공!");
+			
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
-	} // getJsonTest
-
+	} // getJson
+	
+	
+	
 }
+
+
+
+
+
+
+
+

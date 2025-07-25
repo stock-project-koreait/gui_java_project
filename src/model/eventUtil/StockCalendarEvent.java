@@ -38,14 +38,12 @@ public class StockCalendarEvent {
 				int month = calendarPanel.getMonthChooser();
 				int year = calendarPanel.getYearChooser();
 				
+				mainModel.getStockDividendInfoModel().getStockDividendList().clear();
+				
 				// 회사 미입력 시 경고창 출력
 				companyIsEmptyToShowMessage(mainView, companyName);
 
-				// textField에서 입력한 회사명에 해당하는 배당락일을 구하기 위한 api 호출
-				StockDividendInfoAPI.getApi(companyName);
 				getCalendarDaysToView(mainView, month, year);
-				
-				// 날짜들을 담은 데이터리스트에서 배당락일과 같으면 색깔 변경
 				
 				// 배당금정보 모델에서 가져온 리스트를 stockDividendList 변수에 담음
 				DefaultListModel<StockDividendInfoVO> stockDividendList = mainModel.getStockDividendInfoModel().getStockDividendList();
@@ -63,6 +61,7 @@ public class StockCalendarEvent {
 				int apiYear = 0;
 				int apiMonth = 0;
 				int apiDay = 0;
+				int dayOfWeek = 0;
 				
 				for(Date date : dateList) {
 					
@@ -70,10 +69,19 @@ public class StockCalendarEvent {
 					calendar.setTime(date);
 					
 					calendar.add(Calendar.DATE, -2);
-
+					
+					dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+					// 주말일경우 금요일로 배당락일이 됨
+					if(dayOfWeek == Calendar.SATURDAY) { // 토요일이면
+						calendar.add(Calendar.DATE, -1);
+					} else if(dayOfWeek == Calendar.SUNDAY) { // 일요일이면
+						calendar.add(Calendar.DATE, -2);
+					}
+					
 					apiYear = calendar.get(Calendar.YEAR);
 					apiMonth = calendar.get(Calendar.MONTH)+1;
 					apiDay = calendar.get(Calendar.DATE);
+					dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 					
 					if(apiYear == year && apiMonth == (month+1)) {
 						
@@ -87,23 +95,37 @@ public class StockCalendarEvent {
 									days.get(i).setBackground(Color.CYAN);
 									
 									calendarPanel.getShowDayAndCompany()
-										.setText(companyName + " 배당락일");
-									
+										.setText(
+											getDayOfWeek(dayOfWeek) + " "	
+											+ String.valueOf(apiYear) + "년 "
+											+ String.valueOf(apiMonth) + "월 "
+											+ String.valueOf(apiDay) + "일 " 
+											+ companyName + " 배당락일"
+										);
 								} 
 							} catch (NumberFormatException nfe) {
 								continue;
 							}
 						}
-						
 					}
 				}
-				
-				
-				
 			}
 		});
 
 	} // getStockDeividendCalendar
+	
+	public String getDayOfWeek(int dayOfWeek) {
+		switch (dayOfWeek) {
+		case Calendar.SUNDAY: return "일요일";
+		case Calendar.MONDAY : return "월요일";
+		case Calendar.TUESDAY : return "화요일";
+		case Calendar.WEDNESDAY : return "수요일";
+		case Calendar.THURSDAY : return "목요일";
+		case Calendar.FRIDAY : return "금요일";
+		case Calendar.SATURDAY : return "토요일";
+		default : return "요일이 없음";
+		}
+	}
 	
 	
 	// view에서 선택한 연도, 월에 맞는 날짜 데이터들을 보여주는 메서드
