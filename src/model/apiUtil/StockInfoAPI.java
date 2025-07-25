@@ -2,7 +2,6 @@ package model.apiUtil;
 
 import java.util.Objects;
 
-
 import javax.swing.DefaultListModel;
 
 import com.google.gson.JsonArray;
@@ -23,22 +22,25 @@ public class StockInfoAPI {
 
 		Request request = new Request.Builder().url(ApiConstant.STOCKINFO_API + itmsNm).build();
 		String isinCd = null;
+		Response response = null;
 
 		try {
-			Response response = ApiConstant.client.newCall(request).execute();
+			response = ApiConstant.client.newCall(request).execute();
 			String json = Objects.requireNonNull(response.body()).string();
 			JsonObject jsonObj = ApiConstant.gson.fromJson(json, JsonObject.class);
-			JsonArray itemArray = jsonObj
-					.getAsJsonObject("response")
-					.getAsJsonObject("body")
-					.getAsJsonObject("items")
+			JsonArray itemArray = jsonObj.getAsJsonObject("response").getAsJsonObject("body").getAsJsonObject("items")
 					.getAsJsonArray("item");
 
 			isinCd = itemArray.get(0).getAsJsonObject().get("isinCd").getAsString();
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if (response.body() != null && response != null) {
+				response.body().close();
+			}
 		}
+
 		return isinCd;
 
 	} // getIsinCd
@@ -47,15 +49,12 @@ public class StockInfoAPI {
 	public static DefaultListModel<StockInfoVO> getStockInfo(String itmsNm) {
 
 		Request request = new Request.Builder().url(ApiConstant.STOCKINFO_API + itmsNm).build();
-
+		Response response = null;
 		try {
-			Response response = ApiConstant.client.newCall(request).execute();
+			response = ApiConstant.client.newCall(request).execute();
 			String json = Objects.requireNonNull(response.body()).string();
 			JsonObject jsonObj = ApiConstant.gson.fromJson(json, JsonObject.class);
-			JsonArray itemArray = jsonObj
-					.getAsJsonObject("response")
-					.getAsJsonObject("body")
-					.getAsJsonObject("items")
+			JsonArray itemArray = jsonObj.getAsJsonObject("response").getAsJsonObject("body").getAsJsonObject("items")
 					.getAsJsonArray("item");
 
 			for (JsonElement ele : itemArray) {
@@ -74,6 +73,10 @@ public class StockInfoAPI {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if (response.body() != null && response != null) {
+				response.body().close();
+			}
 		}
 
 		return StockInfoModel.getStockInfoList();
