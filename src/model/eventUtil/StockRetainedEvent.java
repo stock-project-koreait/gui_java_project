@@ -74,7 +74,7 @@ public class StockRetainedEvent {
       .getColumnName()
       .addRow(new Object[] {
             StockRetainedPanel.getCompanyName(), // 회사 이름
-//            getExpectedDividend(객체,numberOfretainedStock), // 예상 배당금 계산 결과
+            getExpectedDividend(getRecentDividendInfo(mainView, mainModel),numberOfretainedStock), // 예상 배당금 계산 결과
             getDividendPaymentsatus(mainView, mainModel) // 올해 배당금 지급 현황
          }); 
       
@@ -83,6 +83,7 @@ public class StockRetainedEvent {
    
 //   예상 배당금 계산 후 String으로 바꾸고 리턴해주는 메소드
    public String getExpectedDividend(StockDividendInfoVO obj, int numberOfretainedStock) {
+	   System.out.println(obj);
       return Integer.toString(Integer.parseInt(obj.getStckGenrDvdnAmt()) * numberOfretainedStock) + " 원";
    } // getExpectedDividend
    
@@ -131,19 +132,22 @@ public class StockRetainedEvent {
 //      리턴할 리스트 초기화
       List<String> selectDateList = new ArrayList<String>();
       
+      mainModel.getStockDividendInfoModel().getStockDividendList().clear();
       StockDividendInfoAPI.getApi(companyNm);
       
 //      api에서 가져온 회사의 배당 정보
       DefaultListModel<StockDividendInfoVO> list = mainModel.getStockDividendInfoModel().getStockDividendList();
       
       int size = list.getSize();
-      
       for(int i=0; i<size-1; i++) {
          String date = list.get(i).getCashDvdnPayDt().toString(); // api 데이터에 있는 날짜
-         String year = date.substring(0, 4);
-         if(!date.isEmpty()&&year.equals(currentYear)) { // 현재 년도와 같을 경우에만 가져옴
-            selectDateList.add(date);
+         if(date!=null && !date.isEmpty()) {
+        	 String year = date.substring(0, 4);
+             if(year.equals(currentYear)) { // 현재 년도와 같을 경우에만 가져옴
+                selectDateList.add(date);
+             } 
          }
+         
       }
       
       return selectDateList; 
@@ -153,9 +157,12 @@ public class StockRetainedEvent {
 //   제일 최근 배당 정보 객체를 리턴하는 메소드
    public static StockDividendInfoVO getRecentDividendInfo(MainView mainView, MainModel mainModel) {
       
+//	  mainModel.getStockDividendInfoModel().getStockDividendList().clear();
+	   
       String companyNm = mainView.getStockRetainedPanel().getCompanyName();
       
-      DefaultListModel<StockDividendInfoVO> list = StockDividendInfoAPI.getApi(companyNm);
+      StockDividendInfoAPI.getApi(companyNm);
+      DefaultListModel<StockDividendInfoVO> list = mainModel.getStockDividendInfoModel().getStockDividendList();
       
 //    VO타입 객체를 담은 리스트
       List<StockDividendInfoVO> stockList = new ArrayList<StockDividendInfoVO>();
@@ -165,7 +172,8 @@ public class StockRetainedEvent {
     	  stockList.add(list.get(i));
       }
       
-      stockList.stream()
+      return stockList.stream()
+    	.filter(vo -> vo.getCashDvdnPayDt()!=null && !vo.getCashDvdnPayDt().isEmpty())
       	.max(Comparator.comparingInt(vo -> Integer.parseInt(vo.getCashDvdnPayDt())))
       	.orElse(null);
       
