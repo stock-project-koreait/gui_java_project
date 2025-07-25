@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -150,29 +151,45 @@ public class StockRetainedEvent {
    
    
 //   제일 최근 배당 정보 객체를 리턴하는 메소드
-//   public static DefaultListModel<StockDividendInfoVO> getRecentDividendInfo(MainView mainView, MainModel mainModel) {
-//      
-//      String companyNm = mainView.getStockRetainedPanel().getCompanyName();
-//      
-//      DefaultListModel<StockDividendInfoVO> list = StockDividendInfoAPI.getApi(companyNm);
-//      
-////      데이트 포맷
-//      SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-//      int size = list.getSize();
-//      
-//      try {
-//         
-//         Date curruntDate = sdf.parse(String.valueOf(LocalDate.now()));
-//         Date apiDate = sdf.parse();
-//         
-//         
-//      } catch (ParseException e) {
-//         e.printStackTrace();
-//      } // 현재 년월일
-//
-//      
-//      
-//   }
+   public static StockDividendInfoVO getRecentDividendInfo(MainView mainView, MainModel mainModel) {
+      
+      String companyNm = mainView.getStockRetainedPanel().getCompanyName();
+      
+      DefaultListModel<StockDividendInfoVO> list = StockDividendInfoAPI.getApi(companyNm);
+      
+//    VO타입 객체를 담은 리스트
+      List<StockDividendInfoVO> stockList = new ArrayList<StockDividendInfoVO>();
+      
+      int listSize = list.size();
+      for(int i=0; i<listSize; i++) {
+    	  stockList.add(list.get(i));
+      }
+      
+      /*
+       비교하다가 마지막 인덱스까지 왔을 경우 -> 마지막 인덱스 객체 반환
+       */
+      
+      StockDividendInfoVO recent = null;
+      int bigger = 0;
+      
+      for(StockDividendInfoVO obj : stockList) {
+    	  String currStr = obj.getCashDvdnPayDt();
+    	  if(currStr!=null && !currStr.isEmpty()) {
+//    		  날짜를 int로 바꿔서 크기 비교
+    		  int currDateForInt = Integer.parseInt(currStr);
+    		  if(currDateForInt > bigger) bigger = currDateForInt; // 제일 큰 수를 현재 날짜값으로 설정
+    		  else return obj;
+    	  }
+      }
+
+      
+      
+      
+      
+      
+      
+      
+   }
    
    
    // String인 날짜 List 요소들을 Date 타입으로 변환 후 List에 담음
