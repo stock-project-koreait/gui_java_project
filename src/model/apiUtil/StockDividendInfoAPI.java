@@ -1,43 +1,25 @@
 package model.apiUtil;
 
 import java.io.IOException;
+
 import java.util.Objects;
 
 import javax.swing.DefaultListModel;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import model.StockDividendInfoModel;
-import model.StockInfoModel;
+import model.apiUtil.constant.ApiConstant;
 import model.vo.StockDividendInfoVO;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 // 주식 배당금 정보를 호출하는 API
 public class StockDividendInfoAPI {
 
-	static Dotenv dotenv = Dotenv.load();
-	static String apiKey = dotenv.get("STOCK_KEY");
-
-	private static final String STOCK_API = "https://apis.data.go.kr/1160100/service/GetStocDiviInfoService/getDiviInfo?serviceKey="
-			+ apiKey + "&pageNo=1&numOfRows=100&resultType=json&isinCd=";
-
-	// 통신 객체 (HTTP Client : HTTP 요청을 보내고 응답받는 객체)
-	private static final OkHttpClient client = new OkHttpClient();
-	// Gson 객체
-	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
 	public StockDividendInfoAPI() {
-	}
-
-	public static String getStockApi() {
-		return STOCK_API;
 	}
 	
 	// 주식 배당금 api에서 회사이름, 배당기준일, 현급지급일, 배당타입, 한 주당 배당금, 현금 배당률를 listModel를 반환하는 메서드
@@ -51,19 +33,22 @@ public class StockDividendInfoAPI {
 		}
 
 		// request 요청 객체 만들기
-		Request request = new Request.Builder().url(STOCK_API + isinCd).build();
+		Request request = new Request.Builder().url(ApiConstant.STOCK_API + isinCd).build();
 
 		try {
 			// client response
-			Response response = client.newCall(request).execute();
+			Response response = ApiConstant.client.newCall(request).execute();
 			// 응답 요청 json에 저장
 			String json = Objects.requireNonNull(response.body()).string();
 //				System.out.println(request.url());
 			// 아래에서 getAsJson으로 item 추출하기 위해 json 객체로 변환
-			JsonObject jsonObj = gson.fromJson(json, JsonObject.class);
+			JsonObject jsonObj = ApiConstant.gson.fromJson(json, JsonObject.class);
 			// item 키를 jsonarray로 변경
-			JsonArray itemArray = jsonObj.getAsJsonObject("response").getAsJsonObject("body").getAsJsonObject("items")
-					.getAsJsonArray("item");
+			JsonArray itemArray = jsonObj.
+					getAsJsonObject("response").
+					getAsJsonObject("body").
+					getAsJsonObject("items").
+					getAsJsonArray("item");
 
 			for (JsonElement ele : itemArray) {
 				JsonObject obj = ele.getAsJsonObject();
