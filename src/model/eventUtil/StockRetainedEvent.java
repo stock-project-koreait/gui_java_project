@@ -141,7 +141,7 @@ public class StockRetainedEvent {
       for(int i=0; i<size; i++) {
          String date = list.get(i).getCashDvdnPayDt(); // api 데이터에 있는 날짜
          if(date!=null && !date.isEmpty()) {
-        	 String year = date.substring(0, 4);
+            String year = date.substring(0, 4);
              if(year.equals(currentYear)) { // 현재 년도와 같을 경우에만 가져옴
                 selectDateList.add(date);
              } 
@@ -156,8 +156,8 @@ public class StockRetainedEvent {
 //   제일 최근 배당 정보 객체를 리턴하는 메소드
    public static StockDividendInfoVO getRecentDividendInfo(MainView mainView, MainModel mainModel) {
       
-//	  mainModel.getStockDividendInfoModel().getStockDividendList().clear();
-	   
+//     mainModel.getStockDividendInfoModel().getStockDividendList().clear();
+      
       String companyNm = mainView.getStockRetainedPanel().getCompanyName();
       
       StockDividendInfoAPI.getApi(companyNm);
@@ -168,13 +168,13 @@ public class StockRetainedEvent {
       
       int listSize = list.size();
       for(int i=0; i<listSize; i++) {
-    	  stockList.add(list.get(i));
+         stockList.add(list.get(i));
       }
       
       return stockList.stream()
-    	.filter(vo -> vo.getCashDvdnPayDt()!=null && !vo.getCashDvdnPayDt().isEmpty())
-      	.max(Comparator.comparingInt(vo -> Integer.parseInt(vo.getCashDvdnPayDt())))
-      	.orElse(null);
+       .filter(vo -> vo.getCashDvdnPayDt()!=null && !vo.getCashDvdnPayDt().isEmpty())
+         .max(Comparator.comparingInt(vo -> Integer.parseInt(vo.getCashDvdnPayDt())))
+         .orElse(null);
       
 
       
